@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Naman & Radhika, Pushkar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<!-- Link preview on WhatsApp: upload a 1200x630 photo named og.jpg next to this file -->
+<meta name="description" content="Naman Manihar & Radhika Chandak are getting married in Pushkar, 10–11 December 2026.">
+<meta property="og:title" content="Naman & Radhika are getting married">
+<meta property="og:description" content="Pushkar · 10–11 December 2026. Tap to open your invitation.">
+<meta property="og:image" content="og.jpg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@500;700&family=Mukta:wght@400;500;700&family=Yatra+One&display=swap">
+<style>
+/* Layout: a sealed envelope opens onto Pushkar lake at dusk (live canvas: ghats, temples, diyas, rose petals)
+   under a marigold toran; then sandstone pages for letter, story, events by day, a Pushkar guide, travel, RSVP on plum, FAQ.
+   One committed look, like a printed card: colours are set explicitly, no light/dark switch. */
+:root{
+  color-scheme: light;
+  --plum:#3a0d2e; --plum-2:#561741; --maroon:#7d1d3f;
+  --marigold:#f4a52b; --gold:#d9ae62; --gold-2:#f3d08a;
+  --rose:#d9557a; --lake:#1f5f6b;
+  --sand:#f8ecd9; --sand-2:#f0dcbc; --card:#fffaf1;
+  --ink:#2b1424; --muted:#6f5664; --line:#e4cfae;
+  --f-script:"Pinyon Script", "Great Vibes", cursive;
+  --f-head:"Cinzel", "Trajan Pro", Georgia, serif;
+  --f-hindi:"Yatra One", "Tiro Devanagari Hindi", serif;
+  --f-body:"Mukta", "Segoe UI", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+html.locked{overflow:hidden}
+body{margin:0;color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background:var(--sand) radial-gradient(rgba(125,29,63,.07) 1.2px,transparent 1.6px) 0 0/20px 20px}
+img{max-width:100%}
+a{color:var(--maroon)}
+:focus-visible{outline:3px solid var(--marigold);outline-offset:3px}
+h1,h2,h3{margin:0;font-weight:500;text-wrap:balance;line-height:1.2}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.block{padding-block:84px}
+.hi{font-family:var(--f-hindi);font-weight:400}
+
+/* section heading: hindi word, cinzel title, gold ornament */
+.sec-head{text-align:center;display:grid;justify-items:center;gap:6px;margin-bottom:40px}
+.sec-head .hi{color:var(--rose);font-size:22px}
+.sec-head h2{font-family:var(--f-head);font-size:clamp(28px,4.6vw,44px);letter-spacing:.04em;color:var(--plum)}
+.sec-head p{max-width:58ch;margin:6px 0 0;color:var(--muted)}
+.orn{display:flex;align-items:center;gap:12px;justify-content:center;margin-top:6px}
+.orn::before,.orn::after{content:"";height:1.5px;width:min(90px,22vw);background:linear-gradient(90deg,transparent,var(--gold))}
+.orn::after{transform:scaleX(-1)}
+.orn i{width:10px;height:10px;transform:rotate(45deg);background:var(--marigold);box-shadow:0 0 0 3px var(--sand),0 0 0 4.5px var(--gold)}
+
+/* reveal on scroll where supported; everything is fully visible without it */
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    .rise{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
+    @keyframes rise{from{opacity:.25;transform:translateY(28px)}to{opacity:1;transform:none}}
+  }
+}
+
+/* ================= INTRO ENVELOPE ================= */
+.intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;align-content:center;gap:26px;text-align:center;
+  padding:max(24px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  background:
+    repeating-conic-gradient(from 0deg at 50% 46%,rgba(243,208,138,.06) 0 6deg,transparent 6deg 12deg),
+    radial-gradient(70% 60% at 50% 46%,var(--plum-2),var(--plum) 70%);
+  color:var(--gold-2);transition:opacity .9s ease .5s,visibility 0s 1.4s}
+.intro.gone{opacity:0;visibility:hidden}
+.intro .for{margin:0;font-size:15px;letter-spacing:.3em;text-transform:uppercase;font-family:var(--f-head)}
+.intro .who{font-family:var(--f-script);font-size:clamp(46px,11vw,72px);line-height:1;color:#fff;margin:-8px 0 0}
+.env{position:relative;width:min(340px,86vw);aspect-ratio:3/2;max-width:100%;perspective:900px;cursor:pointer;border:0;padding:0;background:none}
+.env-back{position:absolute;inset:0;border-radius:6px;background:#e9cf9f}
+.env-card{position:absolute;left:7%;right:7%;top:8%;bottom:6%;border-radius:4px;background:var(--card);display:grid;place-items:center;align-content:center;gap:2px;color:var(--plum);
+  box-shadow:inset 0 0 0 6px var(--card),inset 0 0 0 7.5px var(--gold);transition:transform 1s cubic-bezier(.5,0,.2,1) .35s}
+.env-card b{font-family:var(--f-script);font-weight:400;font-size:34px;line-height:1}
+.env-card span{font-family:var(--f-head);font-size:11px;letter-spacing:.2em}
+.env-front{position:absolute;inset:0;border-radius:6px;background:
+  linear-gradient(to top right,#e3c48e 50%,transparent 50.5%) left/50% 100% no-repeat,
+  linear-gradient(to top left,#dcbb82 50%,transparent 50.5%) right/50% 100% no-repeat;filter:drop-shadow(0 -1px 0 rgba(0,0,0,.08))}
+.env-flap{position:absolute;left:0;right:0;top:0;height:62%;transform-origin:top;transition:transform .7s ease;z-index:3;
+  background:linear-gradient(#f1d9ab,#e2c28a);clip-path:polygon(0 0,100% 0,50% 100%)}
+.seal{position:absolute;left:50%;top:62%;z-index:4;width:66px;height:66px;margin:-33px 0 0 -33px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 30%,#c44466,#8a1d3c 60%,#5e0f27);color:var(--gold-2);font-family:var(--f-head);font-size:16px;letter-spacing:.06em;
+  box-shadow:0 0 0 4px rgba(138,29,60,.5),0 6px 14px rgba(0,0,0,.35);transition:opacity .3s ease,transform .4s ease}
+.env-shadow{position:absolute;inset:auto 8% -14px;height:16px;border-radius:50%;background:rgba(0,0,0,.35);filter:blur(10px)}
+.intro.opening .seal{opacity:0;transform:scale(1.4)}
+.intro.opening .env-flap{transform:rotateX(180deg);z-index:0}
+.intro.opening .env-card{transform:translateY(-58%)}
+.open-btn{font:inherit;font-family:var(--f-head);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--plum);background:linear-gradient(var(--gold-2),var(--gold));
+  border:0;border-radius:999px;padding:14px 30px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.intro small{color:#c9a7b9;font-size:14px}
+
+/* ================= NAV ================= */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(30,6,25,.92);backdrop-filter:blur(8px);color:var(--gold-2);border-bottom:1px solid rgba(217,174,98,.35)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:#1e0619}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-block:10px}
+.mono{font-family:var(--f-script);font-size:30px;line-height:1;color:var(--gold-2);text-decoration:none}
+.top nav{display:flex;gap:20px;align-items:center;font-family:var(--f-head);font-size:13px;letter-spacing:.12em}
+.top nav a{color:#ead9c0;text-decoration:none}
+.top nav a:hover{color:#fff}
+.top nav .pill{background:var(--marigold);color:var(--plum);padding:6px 16px;border-radius:999px;font-weight:700}
+@media (max-width:760px){.top nav a:not(.pill){display:none}}
+
+/* ================= HERO ================= */
+.hero{position:relative;overflow:hidden;background:#1e0619;color:#fff;isolation:isolate}
+#scene{position:absolute;inset:0;width:100%;height:100%;z-index:-1;display:block}
+.toran{position:absolute;inset:0 0 auto;height:120px;pointer-events:none;z-index:1}
+.toran .rope{position:absolute;left:0;right:0;top:0;height:18px;
+  background:radial-gradient(circle at 50% 55%,#ffd25c 0 5px,#f39a1c 6.5px,#c8640c 8px,transparent 8.6px) 0 0/17px 18px repeat-x}
+.strand{position:absolute;top:10px;display:flex;flex-direction:column;align-items:center;transform-origin:top center;animation:sway 4.5s ease-in-out infinite alternate}
+.strand::before{content:"";position:absolute;top:0;bottom:12px;width:1.5px;background:#7a4a1c;z-index:-1}
+.mg{width:15px;height:15px;margin-top:-1px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#ffd85e,#f39a1c 58%,#c8640c);box-shadow:0 1px 1px rgba(0,0,0,.3)}
+.mg.y{background:radial-gradient(circle at 40% 35%,#fff08a,#f6c21c 58%,#d0940a)}
+.leaf{width:11px;height:20px;margin-top:-2px;background:linear-gradient(#5f9a3b,#2f6b2a);border-radius:50% 50% 50% 50% / 70% 70% 30% 30%}
+@keyframes sway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+.hero-in{position:relative;z-index:2;display:grid;justify-items:center;text-align:center;gap:14px;padding-block:118px 320px}
+.ganesh{font-size:18px;color:var(--gold-2);margin:0}
+.invite-line{margin:0;font-size:18px;color:#f1dfe6;max-width:34ch}
+.invite-line .to-name{font-family:var(--f-script);font-size:34px;color:var(--gold-2);line-height:1}
+.names{font-family:var(--f-script);font-weight:400;font-size:clamp(64px,13vw,132px);line-height:.95;color:var(--gold-2);
+  text-shadow:0 2px 0 rgba(90,20,50,.6),0 0 40px rgba(244,165,43,.35);display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:0 .25em}
+.names .amp{font-size:.55em;color:#fff}
+.hero .date{font-family:var(--f-head);letter-spacing:.22em;font-size:clamp(13px,2vw,16px);color:#fff;margin:4px 0 0;text-transform:uppercase}
+.hero .date b{color:var(--marigold);font-weight:700}
+.countdown{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.cd{min-width:78px;padding:10px 10px 8px;border-radius:12px;background:rgba(30,6,25,.5);border:1px solid rgba(243,208,138,.45);backdrop-filter:blur(4px)}
+.cd b{display:block;font-family:var(--f-head);font-size:30px;line-height:1;color:var(--gold-2);font-variant-numeric:tabular-nums}
+.cd span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#ead9c0}
+.btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:13px 26px;font:inherit;font-family:var(--f-head);font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;cursor:pointer;
+  background:linear-gradient(var(--gold-2),var(--marigold));color:var(--plum);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.btn:hover{filter:brightness(1.06)}
+.btn.ghost{background:rgba(30,6,25,.35);color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.65)}
+.btn.plum{background:var(--plum);color:var(--gold-2)}
+.btn.outline{background:transparent;color:var(--plum);box-shadow:inset 0 0 0 1.5px var(--plum)}
+
+/* music */
+.music{position:fixed;z-index:40;right:max(16px,calc(env(safe-area-inset-right,0px) + 16px));bottom:calc(env(safe-area-inset-bottom,0px) + 16px);
+  display:flex;align-items:center;gap:10px;font:inherit;font-size:14px;font-weight:700;color:var(--gold-2);background:rgba(30,6,25,.9);border:1px solid var(--gold);border-radius:999px;padding:10px 16px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.bars{display:flex;gap:2px;align-items:flex-end;height:14px}
+.bars i{width:3px;height:4px;background:var(--marigold);border-radius:1px}
+.music.on .bars i{animation:eq .9s ease-in-out infinite alternate}
+.music.on .bars i:nth-child(2){animation-delay:.2s}.music.on .bars i:nth-child(3){animation-delay:.45s}.music.on .bars i:nth-child(4){animation-delay:.1s}
+@keyframes eq{from{height:3px}to{height:14px}}
+
+/* ================= BLESSING + LETTER ================= */
+.blessing{text-align:center;display:grid;justify-items:center;gap:12px}
+.blessing .with{font-family:var(--f-head);letter-spacing:.2em;font-size:13px;color:var(--muted);text-transform:uppercase;margin:0}
+.families{display:flex;gap:16px 48px;justify-content:center;flex-wrap:wrap;align-items:center}
+.families div{display:grid;gap:2px}
+.families b{font-family:var(--f-head);font-size:20px;color:var(--plum);font-weight:500}
+.families span{font-size:15px;color:var(--muted)}
+.families .heart{font-family:var(--f-script);font-size:44px;color:var(--rose)}
+.letter-card{max-width:720px;margin:56px auto 0;background:var(--card);border-radius:4px;padding:clamp(28px,6vw,56px);position:relative;
+  box-shadow:0 1px 0 var(--line),0 24px 50px -24px rgba(58,13,46,.35);
+  background-image:linear-gradient(var(--card),var(--card)),repeating-linear-gradient(45deg,var(--gold) 0 2px,transparent 2px 8px);
+  background-clip:padding-box,border-box;border:10px solid transparent}
+.letter-card p{margin:0 0 16px;font-size:19px}
+.letter-card .dear{font-family:var(--f-script);font-size:40px;line-height:1.1;color:var(--maroon)}
+.letter-card .to-name{color:var(--maroon);font-weight:700}
+.letter-card .hl{background:linear-gradient(transparent 58%,rgba(244,165,43,.45) 58%)}
+.letter-card .sign{font-family:var(--f-script);font-size:36px;color:var(--plum);margin:10px 0 0;line-height:1.1}
+
+/* ================= STORY ================= */
+.story{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;position:relative}
+.story::before{content:"";position:absolute;left:6%;right:6%;top:31px;height:2px;background:repeating-linear-gradient(90deg,var(--gold) 0 8px,transparent 8px 14px)}
+.st{display:grid;justify-items:center;text-align:center;gap:8px;position:relative;min-width:0}
+.st .dot{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:var(--plum);color:var(--gold-2);font-family:var(--f-head);font-size:15px;box-shadow:0 0 0 5px var(--sand),0 0 0 7px var(--gold)}
+.st h3{font-family:var(--f-head);font-size:19px;color:var(--plum);margin-top:6px}
+.st p{margin:0;color:var(--muted);font-size:16px;max-width:28ch}
+@media (max-width:820px){
+  .story{grid-template-columns:1fr;gap:28px;padding-left:4px}
+  .story::before{left:31px;right:auto;top:10px;bottom:10px;width:2px;height:auto;background:repeating-linear-gradient(180deg,var(--gold) 0 8px,transparent 8px 14px)}
+  .st{grid-template-columns:64px 1fr;justify-items:start;text-align:left;column-gap:18px}
+  .st .dot{grid-row:span 2}
+  .st h3{margin-top:8px}
+}
+
+/* ================= EVENTS ================= */
+.events-band{background:linear-gradient(var(--sand-2),var(--sand))}
+.day{margin-top:40px}
+.day:first-of-type{margin-top:0}
+.day-title{display:flex;align-items:baseline;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;text-align:center}
+.day-title b{font-family:var(--f-head);font-size:14px;letter-spacing:.24em;color:var(--rose);text-transform:uppercase}
+.day-title span{font-family:var(--f-head);font-size:24px;color:var(--plum)}
+.ev-grid{display:flex;flex-wrap:wrap;gap:22px;justify-content:center}
+.ev{flex:1 1 280px;max-width:340px;min-width:0;background:var(--tint);border-radius:170px 170px 18px 18px;padding:30px 24px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;
+  box-shadow:inset 0 0 0 1.5px rgba(217,174,98,.7),inset 0 0 0 7px var(--tint),inset 0 0 0 8px rgba(217,174,98,.45),0 18px 40px -26px rgba(58,13,46,.5)}
+.ev .ic{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:var(--plum);color:var(--gold-2);margin-bottom:6px;box-shadow:0 0 0 4px var(--tint),0 0 0 5.5px var(--gold)}
+.ev .ic svg{width:30px;height:30px}
+.ev .hi{font-size:22px;color:var(--maroon);line-height:1.2}
+.ev h3{font-family:var(--f-head);font-size:24px;color:var(--plum);letter-spacing:.03em}
+.ev .when{font-weight:700;color:var(--ink);margin:4px 0 0}
+.ev .where{color:var(--muted);margin:0;font-size:15px}
+.ev .dress{margin:12px 0 0;padding-top:12px;border-top:1px dashed rgba(125,29,63,.3);width:100%;font-size:15px}
+.ev .dress b{display:block;font-family:var(--f-head);font-size:11px;letter-spacing:.2em;color:var(--muted);font-weight:700}
+.sw{display:flex;gap:6px;justify-content:center;margin-top:8px}
+.sw i{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15),0 0 0 2px var(--card)}
+.ev .cal{margin-top:14px;font-size:14px;font-weight:700;color:var(--maroon)}
+
+/* ================= PUSHKAR GUIDE ================= */
+.guide{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px}
+.place{background:var(--card);padding:24px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line),inset 0 0 0 5px var(--card),inset 0 0 0 6px var(--line);display:grid;gap:6px;align-content:start;min-width:0}
+.place .hi{color:var(--rose);font-size:18px}
+.place h3{font-family:var(--f-head);font-size:20px;color:var(--plum)}
+.place p{margin:0;color:var(--ink);font-size:16px}
+.place .tip{color:var(--muted);font-size:14px;font-style:italic}
+
+/* ================= TRAVEL ================= */
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;background:var(--plum);border-radius:18px;overflow:hidden;color:#fff;margin-bottom:34px}
+.fact{padding:24px 18px;text-align:center;border-right:1px solid rgba(243,208,138,.25);min-width:0}
+.fact:last-child{border-right:0}
+.fact b{display:block;font-family:var(--f-head);font-size:clamp(24px,3.6vw,34px);color:var(--gold-2);font-variant-numeric:tabular-nums;line-height:1.1}
+.fact span{font-size:14px;color:#ead9c0}
+@media (max-width:720px){.facts{grid-template-columns:1fr 1fr}.fact:nth-child(2){border-right:0}.fact:nth-child(-n+2){border-bottom:1px solid rgba(243,208,138,.25)}}
+.travel{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:28px}
+.travel h3{font-family:var(--f-head);font-size:19px;color:var(--plum);margin-bottom:6px}
+.travel p{margin:0 0 10px}
+.travel .muted{color:var(--muted);font-size:15px}
+
+/* ================= RSVP ================= */
+.rsvp-band{position:relative;color:#fff;background:
+  repeating-conic-gradient(from 0deg at 50% 0%,rgba(243,208,138,.05) 0 5deg,transparent 5deg 10deg),
+  linear-gradient(var(--plum),#24081d)}
+.rsvp-band .sec-head h2{color:var(--gold-2)}
+.rsvp-band .sec-head p{color:#ead9c0}
+.rsvp-band .orn i{box-shadow:0 0 0 3px var(--plum),0 0 0 4.5px var(--gold)}
+.form-card{max-width:720px;margin:0 auto;background:var(--card);color:var(--ink);border-radius:10px;padding:clamp(22px,5vw,44px);box-shadow:0 30px 60px -30px rgba(0,0,0,.6),inset 0 0 0 1px var(--line),inset 0 0 0 7px var(--card),inset 0 0 0 8px var(--gold)}
+form{display:grid;gap:20px}
+label,.lbl{font-weight:700;font-size:15px;display:block;margin-bottom:6px;color:var(--plum)}
+.field{width:100%;font:inherit;font-size:17px;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
+.field:focus{border-color:var(--marigold);outline:none;box-shadow:0 0 0 3px rgba(244,165,43,.25)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:520px){.row2{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:inline-block;padding:8px 16px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-size:15px;cursor:pointer}
+.chip input:checked + span{background:var(--plum);border-color:var(--plum);color:var(--gold-2);font-weight:700}
+.chip input:focus-visible + span{outline:3px solid var(--marigold);outline-offset:2px}
+.err{color:#b0123c;min-height:1.4em;margin:0;font-size:15px;font-weight:500}
+.form-card .btns{justify-content:flex-start;margin-top:0}
+.thanks{text-align:center;display:grid;gap:10px;justify-items:center}
+.thanks h3{font-family:var(--f-script);font-size:52px;color:var(--maroon);line-height:1.1}
+.thanks p{margin:0;max-width:46ch;color:var(--muted)}
+
+/* ================= FAQ + CHECKLIST ================= */
+.two{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:start}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.two h2{font-family:var(--f-head);font-size:28px;color:var(--plum);margin-bottom:18px}
+details{border-bottom:1px solid var(--line);padding:14px 0}
+summary{cursor:pointer;font-weight:700;font-size:17px;color:var(--plum);list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-head);font-size:22px;line-height:1;color:var(--rose);flex:none}
+details[open] summary::after{content:"−"}
+details p{margin:8px 0 0;color:var(--ink)}
+.checks{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.checks button{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:16px;color:var(--ink);cursor:pointer}
+.box{flex:none;width:22px;height:22px;border-radius:6px;border:2px solid var(--maroon);display:grid;place-items:center;margin-top:2px}
+.checks .done .box{background:var(--maroon)}
+.checks .done .box::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.checks .done .txt{text-decoration:line-through;color:var(--muted)}
+
+/* ================= FOOTER ================= */
+footer{background:#1e0619;color:#ead9c0;text-align:center;position:relative;overflow:hidden}
+footer .wrap{padding-block:110px 90px;display:grid;gap:14px;justify-items:center}
+footer .big{font-family:var(--f-script);font-size:clamp(52px,10vw,88px);color:var(--gold-2);line-height:1}
+footer .tag{font-family:var(--f-head);letter-spacing:.2em;color:var(--marigold);font-size:14px}
+footer a{color:var(--gold-2)}
+.contacts{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;font-size:15px;margin-top:6px}
+.contacts b{color:#fff;font-weight:500;display:block}
+.contacts span{user-select:all}
+
+@media (prefers-reduced-motion: reduce){
+  .strand,.music.on .bars i{animation:none}
+  .env-card,.env-flap,.intro{transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ ENVELOPE INTRO ============ -->
+<div class="intro" id="intro" role="dialog" aria-label="Your invitation">
+  <p class="for">An invitation for</p>
+  <p class="who to-name">you</p>
+  <button class="env" id="env" type="button" aria-label="Open the envelope">
+    <span class="env-shadow"></span>
+    <span class="env-back"></span>
+    <span class="env-card"><span>THE WEDDING OF</span><b id="envNames"></b></span>
+    <span class="env-front"></span>
+    <span class="env-flap"></span>
+    <span class="seal" id="seal"></span>
+  </button>
+  <button class="open-btn" id="openBtn" type="button">Open invitation</button>
+  <small>Turn your sound on for a little music</small>
+</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mono" href="#top" id="mono"></a>
+    <nav>
+      <a href="#events">Events</a>
+      <a href="#pushkar">Pushkar</a>
+      <a href="#travel">Travel</a>
+      <a href="#faq">FAQ</a>
+      <a class="pill" href="#rsvp">RSVP</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO: Pushkar lake at dusk ============ -->
+<section class="hero" id="top">
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="toran" id="toran" aria-hidden="true"><div class="rope"></div></div>
+  <div class="hero-in wrap" id="heroIn">
+    <p class="ganesh hi" lang="hi">॥ श्री गणेशाय नमः ॥</p>
+    <p class="invite-line" id="inviteLine">With love and joy, you are warmly invited to the wedding of</p>
+    <h1 class="names" id="names"></h1>
+    <p class="date" id="heroDate"></p>
+    <div class="countdown" id="countdown"></div>
+    <div class="btns">
+      <a class="btn" href="#rsvp">I'll be there</a>
+      <a class="btn ghost" id="calAll" href="#" target="_blank" rel="noopener">Save the date</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLESSING + LETTER ============ -->
+<section class="block" id="letter">
+  <div class="wrap">
+    <div class="blessing rise">
+      <p class="with">With the blessings of our families</p>
+      <div class="families" id="families"></div>
+      <div class="orn"><i></i></div>
+    </div>
+    <div class="letter-card rise" id="letterBody"></div>
+  </div>
+</section>
+
+<!-- ============ EVENTS ============ -->
+<section class="block events-band" id="events">
+  <div class="wrap">
+    <div class="sec-head"><span class="hi" lang="hi">शुभ मुहूर्त</span><h2>The Celebrations</h2><div class="orn"><i></i></div>
+      <p id="eventsLead"></p></div>
+    <div id="dayList"></div>
+  </div>
+</section>
+
+<!-- ============ PUSHKAR GUIDE ============ -->
+<section class="block" id="pushkar">
+  <div class="wrap">
+    <div class="sec-head"><span class="hi" lang="hi">पधारो म्हारे देस</span><h2>While You're in Pushkar</h2><div class="orn"><i></i></div>
+      <p>Pushkar is one of India's oldest towns, built around a sacred lake with 52 ghats. Come a day early if you can.</p></div>
+    <div class="guide" id="guideList"></div>
+  </div>
+</section>
+
+<!-- ============ TRAVEL ============ -->
+<section class="block" id="travel" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><span class="hi" lang="hi">यात्रा</span><h2>Getting There</h2><div class="orn"><i></i></div></div>
+    <div class="facts" id="facts"></div>
+    <div class="travel" id="travelList"></div>
+  </div>
+</section>
+
+<!-- ============ RSVP ============ -->
+<section class="block rsvp-band" id="rsvp">
+  <div class="wrap">
+    <div class="sec-head"><span class="hi" lang="hi" style="color:var(--marigold)">आपका इंतज़ार है</span><h2>Will You Join Us?</h2><div class="orn"><i></i></div>
+      <p id="rsvpLead"></p></div>
+    <div class="form-card">
+      <form id="rsvpForm" novalidate>
+        <div>
+          <label for="r-name">Your full name</label>
+          <input class="field" id="r-name" name="name" autocomplete="name" placeholder="Full name">
+        </div>
+        <div>
+          <span class="lbl" id="sideLbl">You're family or friend of</span>
+          <div class="chips" role="radiogroup" aria-labelledby="sideLbl" id="sideChips"></div>
+        </div>
+        <div>
+          <span class="lbl" id="evLbl">Which celebrations will you attend?</span>
+          <div class="chips" role="group" aria-labelledby="evLbl" id="evChips"></div>
+        </div>
+        <div class="row2">
+          <div><label for="r-guests">Number of people (including you)</label><input class="field" id="r-guests" type="number" min="1" max="10" value="1"></div>
+          <div><label for="r-city">Travelling from</label><input class="field" id="r-city" placeholder="City"></div>
+        </div>
+        <div class="row2">
+          <div><label for="r-arrive">Arriving in Pushkar</label><input class="field" id="r-arrive" type="date"></div>
+          <div><label for="r-leave">Leaving on</label><input class="field" id="r-leave" type="date"></div>
+        </div>
+        <div><label for="r-note">A note for us (food needs, a song for the sangeet, a blessing)</label><textarea class="field" id="r-note" rows="3"></textarea></div>
+        <p class="err" id="r-err" role="alert"></p>
+        <div class="btns">
+          <button class="btn plum" type="submit" id="r-send">Send my RSVP</button>
+          <button class="btn outline" type="button" id="r-no">Sorry, I can't come</button>
+        </div>
+      </form>
+      <div class="thanks" id="thanks" hidden>
+        <h3 id="thanksTitle"></h3>
+        <p id="thanksText"></p>
+        <button class="btn outline" type="button" id="r-edit">Change my answer</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ + CHECKLIST ============ -->
+<section class="block" id="faq">
+  <div class="wrap two">
+    <div><h2>Good to Know</h2><div id="faqList"></div></div>
+    <div><h2>Your Packing List</h2><p style="margin:-8px 0 16px;color:var(--muted)">Tap to tick. Saved on this phone.</p><ul class="checks" id="checkList"></ul></div>
+  </div>
+</section>
+
+<footer>
+  <div class="toran" id="toran2" aria-hidden="true"><div class="rope"></div></div>
+  <div class="wrap">
+    <span class="big" id="footNames"></span>
+    <span class="tag" id="hashtag"></span>
+    <p style="margin:0" id="footWhen"></p>
+    <p style="margin:0" id="waWrap"><a id="waLink" href="#" target="_blank" rel="noopener">Join the guest WhatsApp group</a></p>
+    <div class="contacts" id="contacts"></div>
+  </div>
+</footer>
+
+<button class="music" id="music" type="button" aria-pressed="false"><span class="bars"><i></i><i></i><i></i><i></i></span><span id="musicTxt">Play music</span></button>
+
+<script>
+/* =====================================================================
+   EDIT HERE: everything on the page comes from this block.
+   Text marked SAMPLE is made up: replace it with your own.
+   ===================================================================== */
+const CONFIG = {
+  groom: "Naman",
+  bride: "Radhika",
+  hashtag: "#NamanKiRadhika",
+  city: "Pushkar",
+  dateText: "10 & 11 December 2026",
+  saveDate: { from: "2026-12-10", to: "2026-12-11" },   // what "Save the date" puts in the calendar
+  arriveBy: "2026-12-09", leaveOn: "2026-12-12",         // default travel dates in the RSVP
+  families: [
+    { name: "Naman Manihar", note: "The Manihar family" },
+    { name: "Radhika Chandak", note: "The Chandak family" },
+  ],
+
+  // The letter. {name} becomes the guest's name. ==text== is highlighted, **text** is bold.
+  letter: [
+    "Every version of our guest list started with your name, {name}. So here it is, properly.",
+    "We're getting married in ==Pushkar on 10 and 11 December 2026==, by the lake, among the ghats and the temple bells. The celebrations begin with Battisi and our reception at Surpura Bagh, Jodhpur on 30 November, and we'd love you there for all of it: the carnival, the sangeet where everyone dances, the mayra, the pheras under the stars, and the late-night chai after.",
+    "Please tell us you're coming by **25 November**, so we can sort your room, your pickup and your seat at the front.",
+  ],
+  signOff: "With love, Naman & Radhika",
+
+  // The events. date is YYYY-MM-DD, times are 24-hour (times are SAMPLE: set the real ones).
+  // icon: kalash, heart, carnival, sangeet, pheras, haldi, mehendi, baraat
+  events: [
+    { name: "Battisi",   hindi: "बत्तीसी",  icon: "kalash",   date: "2026-11-30", start: "10:00", end: "13:00", place: "Surpura Bagh, Jodhpur", venue: "Surpura Bagh, Jodhpur",
+      dress: "Traditional, bright colours", tint: "#fff1c9", swatches: ["#f6c62e", "#e8742a", "#c8323c", "#2f7d4f"] },
+    { name: "Reception", hindi: "रिसेप्शन", icon: "heart",    date: "2026-11-30", start: "19:30", end: "23:30", place: "Surpura Bagh, Jodhpur", venue: "Surpura Bagh, Jodhpur",
+      dress: "Formal evening wear", tint: "#e9e4f3", swatches: ["#3a0d2e", "#d9ae62", "#b9b9c4", "#7d1d3f"] },
+    { name: "Carnival",  hindi: "कार्निवल", icon: "carnival", date: "2026-12-10", start: "11:00", end: "16:00", place: "Taj Pushkar",
+      dress: "Fun, colourful and comfortable", tint: "#e3f1ec", swatches: ["#2bb3a3", "#f4a52b", "#e0607e", "#5e87c0"] },
+    { name: "Sangeet",   hindi: "संगीत",   icon: "sangeet",  date: "2026-12-10", start: "19:30", end: "23:59", place: "Taj Pushkar",
+      dress: "Sparkle, and shoes you can dance in", tint: "#efe4f4", swatches: ["#d4a53a", "#b9b9c4", "#7d1d3f", "#2b1424"] },
+    { name: "Mayra",     hindi: "मायरा",    icon: "kalash",   date: "2026-12-11", start: "10:00", end: "13:00", place: "Taj Pushkar",
+      dress: "Traditional: bandhej, leheriya, safas", tint: "#ffe3d2", swatches: ["#c8323c", "#f4a52b", "#d94c8a", "#2f7d4f"] },
+    { name: "Wedding",   hindi: "शुभ विवाह", icon: "pheras",  date: "2026-12-11", start: "19:00", end: "23:59", place: "Taj Pushkar",
+      dress: "Traditional, your finest", tint: "#fbe1e3", swatches: ["#a3142f", "#d9557a", "#d9ae62", "#3a0d2e"] },
+  ],
+
+  venue: {                                      // main venue (10 & 11 December)
+    name: "Taj Pushkar",
+    address: "Pushkar, Rajasthan · 10 & 11 December",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Taj+Pushkar",
+  },
+  venue2: {                                     // 30 November
+    name: "Surpura Bagh, Jodhpur",
+    address: "Jodhpur, Rajasthan · 30 November",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Surpura+Bagh+Jodhpur",
+  },
+  facts: [
+    { big: "~8°C", small: "December nights" },
+    { big: "45 km", small: "from Kishangarh airport" },
+    { big: "15 km", small: "from Ajmer Junction" },
+    { big: "Veg", small: "Pushkar is an all-vegetarian holy town" },
+  ],
+  travel: [
+    { title: "To Jodhpur (30 November)", text: "Jodhpur Airport (JDH) and Jodhpur Junction railway station both have direct connections from Delhi, Mumbai and Jaipur.", muted: "Send us your travel details and we'll arrange your pickup." },
+    { title: "To Pushkar by air", text: "Kishangarh Airport (KQH) is the closest, about an hour away. Jaipur (JAI) has more flights and is about 3 hours by road.", muted: "Send us your flight details and we'll arrange your pickup." },
+    { title: "To Pushkar by train", text: "Ajmer Junction (AII) has direct trains from Delhi, Mumbai, Jaipur and Ahmedabad. Pushkar is 30 minutes away over the Nag Pahar hills.", muted: "Cabs from the station cost about ₹600–800." },
+    { title: "Where you'll stay", text: "Rooms are booked for you from 9 to 12 December. You'll get your room details on WhatsApp a week before.", muted: "SAMPLE: change this to your real arrangements." },
+  ],
+  pushkar: [
+    { hindi: "पुष्कर सरोवर", title: "The lake and its ghats", text: "Go down to Varaha or Brahma Ghat at sunset for the evening aarti, when diyas float out across the water.", tip: "Shoes come off on the ghats, and please don't take photos of people bathing." },
+    { hindi: "ब्रह्मा मंदिर", title: "Brahma Temple", text: "One of the very few temples in the world to Lord Brahma, with a red spire you'll see from the lake.", tip: "Go early morning to skip the queue." },
+    { hindi: "सावित्री माता", title: "Savitri Mata Temple", text: "On Ratnagiri hill above town. Take the ropeway, or climb for about 45 minutes, for sunrise over the whole of Pushkar.", tip: "Start before dawn to catch the sunrise." },
+    { hindi: "सदर बाज़ार", title: "The bazaar", text: "Silver jewellery, bandhej dupattas, juttis and bottles of Pushkar rose water and gulkand to take home.", tip: "Bargain with a smile." },
+    { hindi: "मालपुआ", title: "What to eat", text: "Pushkar's famous malpua, hot kachori in the morning, and a glass of thick lassi in a kulhad.", tip: "Everything in town is vegetarian." },
+    { hindi: "गुलाब", title: "The rose fields", text: "Pushkar's rose gardens supply rose water and gulkand across India. The petals at our wedding will be from here.", tip: "Ask the driver to stop on the Ajmer road." },
+  ],
+  faq: [
+    { q: "Is Pushkar vegetarian?", a: "Yes. Pushkar is a holy town, so meat, eggs and alcohol aren't served anywhere in town. All wedding food is pure vegetarian." },
+    { q: "What will the weather be like?", a: "December days are pleasant, around 24°C, but nights drop to about 8°C. Bring a warm shawl or jacket for the sangeet and the wedding night." },
+    { q: "Can I bring someone?", a: "Your invitation is for the people named on it. If you'd like to bring someone, message us before you RSVP." },
+    { q: "Will there be pickup from the airport or station?", a: "Yes, from Kishangarh airport, Jaipur airport and Ajmer Junction. Add your travel dates in the RSVP and we'll message you the details." },
+    { q: "Are kids welcome?", a: "Of course. Include them in your number of people when you RSVP." },
+  ],
+  sides: ["Naman's side", "Radhika's side", "Both!"],
+  rsvpBy: "25 November 2026",
+  checklist: [
+    "An outfit for each of the six events (see the dress codes)",
+    "A photo ID for hotel check-in",
+    "A shawl or jacket for cold Pushkar nights",
+    "Comfortable shoes for the baraat, and ones easy to slip off at the ghats",
+    "A little cash for the bazaar",
+    "Your RSVP, sent",
+  ],
+  contacts: [],    // add later, e.g. { who: "Name · relation", phone: "+91 ..." }
+  waGroup: "",     // paste your WhatsApp group invite link
+  sheetUrl: "",    // Google Apps Script web-app URL for RSVPs (see apps-script.gs and README.md)
+};
+/* ===================================================================== */
+
+const $ = (s, r = document) => r.querySelector(s);
+const esc = t => String(t).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k, v){ try { localStorage.setItem(k, v); } catch(e){} } };
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const PREVIEW = location.protocol === "file:" || /^(localhost|127\.0\.0\.1)$|claude\.ai$|claudeusercontent\.com$/.test(location.hostname);
+const couple = `${CONFIG.groom} & ${CONFIG.bride}`;
+
+/* ---------- who is this for? ?name=Harshit (or #for-Harshit) ---------- */
+const qs = new URLSearchParams(location.search);
+let guest = (qs.get("name") || qs.get("to") || "").trim();
+if (!guest && /^#for-/.test(location.hash)) guest = decodeURIComponent(location.hash.slice(5)).replace(/[-_]+/g, " ").trim();
+guest = guest.slice(0, 40);
+// With a name in the link the page greets that guest; without one it uses wording that suits every guest.
+if (guest) $("#inviteLine").innerHTML = `<span class="to-name">${esc(guest)}</span>,<br>you are warmly invited to the wedding of`;
+$(".intro .who").textContent = guest || "you";
+if (guest) { $("#r-name").value = guest; document.title = `${guest}, you're invited · ${couple}`; }
+
+/* ---------- names everywhere ---------- */
+const ini = `${CONFIG.groom[0]}<span style="font-size:.7em"> &amp; </span>${CONFIG.bride[0]}`;
+$("#mono").innerHTML = ini;
+$("#seal").textContent = `${CONFIG.groom[0]}·${CONFIG.bride[0]}`;
+$("#envNames").textContent = couple;
+$("#names").innerHTML = `<span>${esc(CONFIG.groom)}</span><span class="amp">&amp;</span><span>${esc(CONFIG.bride)}</span>`;
+$("#heroDate").innerHTML = `<b>${esc(CONFIG.dateText)}</b> &nbsp;·&nbsp; ${esc(CONFIG.city)}, Rajasthan`;
+$("#footNames").textContent = couple;
+$("#hashtag").textContent = CONFIG.hashtag;
+$("#footWhen").textContent = `${CONFIG.dateText} · ${CONFIG.venue.name}`;
+
+/* ---------- dates ---------- */
+const at = (d, t) => new Date(`${d}T${t}:00+05:30`);
+const dayFmt = new Intl.DateTimeFormat("en-IN", { weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Kolkata" });
+const timeFmt = new Intl.DateTimeFormat("en-IN", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "Asia/Kolkata" });
+const gStamp = (d, t) => d.replace(/-/g, "") + "T" + t.replace(":", "") + "00";
+const calUrl = (title, d1, t1, d2, t2, where, details) => "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+  "&text=" + encodeURIComponent(title) + "&dates=" + gStamp(d1, t1) + "/" + gStamp(d2, t2) + "&ctz=Asia/Kolkata" +
+  "&location=" + encodeURIComponent(where) + "&details=" + encodeURIComponent(details || "");
+const first = CONFIG.events[0], last = CONFIG.events[CONFIG.events.length - 1];
+$("#calAll").href = calUrl(`${couple}'s wedding`, CONFIG.saveDate.from, "00:00", CONFIG.saveDate.to, "23:59", CONFIG.venue.name,
+  CONFIG.events.map(e => `${e.name}: ${dayFmt.format(at(e.date, e.start))}, ${timeFmt.format(at(e.date, e.start))}`).join("\n"));
+
+/* ---------- countdown ---------- */
+const startsAt = at(first.date, first.start);
+function tick(){
+  const s = Math.max(0, Math.floor((startsAt - Date.now()) / 1000));
+  $("#countdown").innerHTML = s === 0 ? `<div class="cd"><b>Today</b><span>it's happening</span></div>` :
+    [["days", Math.floor(s / 86400)], ["hours", Math.floor(s % 86400 / 3600)], ["mins", Math.floor(s % 3600 / 60)], ["secs", s % 60]]
+      .map(([k, v]) => `<div class="cd"><b>${String(v).padStart(2, "0")}</b><span>${k}</span></div>`).join("");
+}
+tick(); setInterval(tick, 1000);
+
+/* ---------- blessing, letter, story ---------- */
+$("#families").innerHTML = CONFIG.families.map(f => `<div><b>${esc(f.name)}</b><span>${esc(f.note)}</span></div>`).join(`<span class="heart">&amp;</span>`);
+const inline = t => (guest ? esc(t).replace(/\{name\}/g, `<span class="to-name">${esc(guest)}</span>`) : esc(t).replace(/,?\s*\{name\}/g, ""))
+  .replace(/==(.+?)==/g, '<span class="hl">$1</span>').replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+$("#letterBody").innerHTML = `<p class="dear">${esc(guest ? "Dear " + guest + "," : "Dear family and loved ones,")}</p>` +
+  CONFIG.letter.map(p => `<p>${inline(p)}</p>`).join("") + `<p class="sign">${esc(CONFIG.signOff)}</p>`;
+/* ---------- events, grouped by day ---------- */
+const ICONS = {
+  haldi:   '<path d="M3 11h18a9 9 0 0 1-18 0Z"/><path d="M7 7c1.5-2 3.5-2 5 0s3.5 2 5 0"/>',
+  mehendi: '<path d="M12 3c4.5 0 7 3.2 7 7 0 5.3-4.4 9.3-9.5 11 2.2-3 2.3-5.5.2-7.5C6.6 10.6 8.4 3 12 3Z"/><circle cx="13" cy="9.5" r="2"/>',
+  sangeet: '<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',
+  baraat:  '<path d="M12 2v5M12 17v5M2 12h5M17 12h5M5 5l3.5 3.5M15.5 15.5 19 19M19 5l-3.5 3.5M8.5 15.5 5 19"/><circle cx="12" cy="12" r="2"/>',
+  pheras:  '<path d="M12 2c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-6 0 3 1 4 2 4 0-4-1-7 1-10Z"/><path d="M4 22h16"/>',
+  kalash:  '<path d="M10 2.5 12 4l2-1.5"/><path d="M8 5h8"/><path d="M9.5 5C9.5 7 6 8 6 12a6 6 0 0 0 12 0c0-4-3.5-5-3.5-7"/><path d="M8 12h8"/><path d="M9 18l-1.5 3.5h9L15 18"/>',
+  heart:   '<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.4 12 20 12 20Z"/>',
+  carnival:'<circle cx="12" cy="10" r="7"/><path d="M12 3v14M5 10h14M7.1 5.1l9.8 9.8M16.9 5.1l-9.8 9.8"/><path d="M8 22l4-5 4 5"/>',
+};
+const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[k] || ICONS.pheras}</svg>`;
+$("#eventsLead").textContent = `It starts on 30 November with Battisi and the reception at ${CONFIG.venue2.name}, then two days at ${CONFIG.venue.name}. Each celebration has its own dress code.`;
+const days = [];
+CONFIG.events.forEach(e => { let d = days.find(x => x.date === e.date); if (!d) days.push(d = { date: e.date, list: [] }); d.list.push(e); });
+$("#dayList").innerHTML = days.map((d, i) => `<div class="day">
+  <div class="day-title"><b>Day ${i + 1}</b><span>${esc(dayFmt.format(at(d.date, "12:00")))}</span></div>
+  <div class="ev-grid">${d.list.map(e => `<article class="ev rise" style="--tint:${esc(e.tint)}">
+    <span class="ic">${icon(e.icon)}</span>
+    <span class="hi" lang="hi">${esc(e.hindi || "")}</span>
+    <h3>${esc(e.name)}</h3>
+    <p class="when">${esc(timeFmt.format(at(e.date, e.start)))} onwards</p>
+    <p class="where">${esc(e.place)}</p>
+    <div class="dress"><b>DRESS CODE</b>${esc(e.dress)}<div class="sw">${(e.swatches || []).map(c => `<i style="background:${esc(c)}"></i>`).join("")}</div></div>
+    <a class="cal" target="_blank" rel="noopener" href="${esc(calUrl(`${e.name} · ${couple}`, e.date, e.start, e.date, e.end, e.venue || CONFIG.venue.name, `Dress code: ${e.dress}`))}">Add to calendar</a>
+  </article>`).join("")}</div></div>`).join("");
+
+/* ---------- Pushkar guide, travel, FAQ ---------- */
+$("#guideList").innerHTML = CONFIG.pushkar.map(p => `<div class="place rise"><span class="hi" lang="hi">${esc(p.hindi)}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p><p class="tip">${esc(p.tip)}</p></div>`).join("");
+$("#facts").innerHTML = CONFIG.facts.map(f => `<div class="fact"><b>${esc(f.big)}</b><span>${esc(f.small)}</span></div>`).join("");
+$("#travelList").innerHTML =
+  [CONFIG.venue2, CONFIG.venue].map(v => `<div><h3>The venue</h3><p><b>${esc(v.name)}</b></p><p class="muted">${esc(v.address)}</p>
+   <a class="btn outline" href="${esc(v.mapUrl)}" target="_blank" rel="noopener">Open in Maps</a></div>`).join("") +
+  CONFIG.travel.map(t => `<div><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p><p class="muted">${esc(t.muted || "")}</p></div>`).join("");
+$("#faqList").innerHTML = CONFIG.faq.map((f, i) => `<details${i === 0 ? " open" : ""}><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join("");
+
+/* ---------- RSVP ---------- */
+$("#rsvpLead").textContent = `Please reply by ${CONFIG.rsvpBy}. You can come back and change your answer any time.`;
+$("#sideChips").innerHTML = CONFIG.sides.map((s, i) => `<label class="chip"><input type="radio" name="side" id="side-${i}" value="${esc(s)}"><span>${esc(s)}</span></label>`).join("");
+$("#evChips").innerHTML = CONFIG.events.map((e, i) => `<label class="chip"><input type="checkbox" name="ev" id="ev-${i}" value="${esc(e.name)}" checked><span>${esc(e.name)}</span></label>`).join("");
+$("#r-arrive").value = CONFIG.arriveBy; $("#r-leave").value = CONFIG.leaveOn;
+function send(p){
+  store.set("rsvp", JSON.stringify(p));
+  if (!CONFIG.sheetUrl || PREVIEW) return Promise.resolve(false);
+  return fetch(CONFIG.sheetUrl, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(p) })
+    .then(() => true, () => { store.set("rsvp-pending", JSON.stringify(p)); return false; });
+}
+function collect(attending){
+  return { time: new Date().toISOString(), invitedAs: guest, attending, name: $("#r-name").value.trim(),
+    side: (document.querySelector('input[name="side"]:checked') || {}).value || "",
+    events: attending === "yes" ? [...document.querySelectorAll('input[name="ev"]:checked')].map(i => i.value) : [],
+    guests: attending === "yes" ? Math.max(1, parseInt($("#r-guests").value, 10) || 1) : 0,
+    city: $("#r-city").value.trim(), arrive: $("#r-arrive").value, leave: $("#r-leave").value, note: $("#r-note").value.trim() };
+}
+function showThanks(p, sent){
+  $("#rsvpForm").hidden = true; $("#thanks").hidden = false;
+  const yes = p.attending === "yes";
+  $("#thanksTitle").textContent = yes ? `See you in ${CONFIG.city}, ${p.name.split(" ")[0]}!` : "We'll miss you";
+  $("#thanksText").textContent = (yes ? `You're down for ${p.events.join(", ")}${p.guests > 1 ? `, ${p.guests} people` : ""}. We'll message you about rooms and pickup.`
+      : "Thank you for telling us. We'll send you lots of photos.")
+    + (sent ? "" : CONFIG.sheetUrl && !PREVIEW ? " We couldn't reach the guest list just now and will try again next time you open this page." : " (Preview: your answer was saved only on this device.)");
+}
+$("#rsvpForm").addEventListener("submit", ev => {
+  ev.preventDefault();
+  const p = collect("yes");
+  if (!p.name) { $("#r-err").textContent = "Please write your name so we know who's coming."; $("#r-name").focus(); return; }
+  if (!p.events.length) { $("#r-err").textContent = "Pick at least one celebration, or tap \"Sorry, I can't come\"."; return; }
+  $("#r-err").textContent = ""; $("#r-send").disabled = true; $("#r-send").textContent = "Sending…";
+  send(p).then(ok => { $("#r-send").disabled = false; $("#r-send").textContent = "Send my RSVP"; showThanks(p, ok); });
+});
+$("#r-no").addEventListener("click", () => {
+  const p = collect("no");
+  if (!p.name) { $("#r-err").textContent = "Please write your name first."; $("#r-name").focus(); return; }
+  $("#r-err").textContent = ""; send(p).then(ok => showThanks(p, ok));
+});
+$("#r-edit").addEventListener("click", () => { $("#thanks").hidden = true; $("#rsvpForm").hidden = false; });
+try { const pend = JSON.parse(store.get("rsvp-pending") || "null"); if (pend && CONFIG.sheetUrl && !PREVIEW) send(pend).then(ok => ok && store.set("rsvp-pending", "")); } catch(e){}
+
+/* ---------- checklist ---------- */
+let ticks; try { ticks = new Set(JSON.parse(store.get("ticks") || "[]")); } catch(e){ ticks = new Set(); }
+function drawChecks(){
+  $("#checkList").innerHTML = CONFIG.checklist.map((c, i) => `<li><button type="button" id="chk-${i}" class="${ticks.has(i) ? "done" : ""}" aria-pressed="${ticks.has(i)}"><span class="box"></span><span class="txt">${esc(c)}</span></button></li>`).join("");
+}
+drawChecks();
+$("#checkList").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  const i = +b.id.slice(4); ticks.has(i) ? ticks.delete(i) : ticks.add(i);
+  store.set("ticks", JSON.stringify([...ticks])); drawChecks(); $("#chk-" + i).focus();
+});
+
+/* ---------- footer ---------- */
+if (CONFIG.waGroup) $("#waLink").href = CONFIG.waGroup; else $("#waWrap").hidden = true;
+$("#contacts").innerHTML = CONFIG.contacts.map(c => `<div><b>${esc(c.who)}</b><span>${esc(c.phone)}</span></div>`).join("");
+
+/* ---------- marigold torans ---------- */
+function buildToran(el){
+  el.querySelectorAll(".strand").forEach(s => s.remove());
+  const w = el.clientWidth, gap = w < 600 ? 46 : 64, n = Math.floor(w / gap);
+  for (let i = 0; i <= n; i++){
+    const s = document.createElement("div"); s.className = "strand";
+    s.style.left = (i * gap + gap / 2 - 7) + "px";
+    s.style.animationDelay = (-(i * 0.7) % 4.5) + "s";
+    const len = i % 2 ? 3 : 5;
+    for (let k = 0; k < len; k++){ const m = document.createElement("span"); m.className = "mg" + ((k + i) % 2 ? " y" : ""); s.appendChild(m); }
+    const lf = document.createElement("span"); lf.className = "leaf"; s.appendChild(lf);
+    el.appendChild(s);
+  }
+}
+const torans = [$("#toran"), $("#toran2")];
+torans.forEach(buildToran);
+
+/* ---------- envelope intro ---------- */
+const intro = $("#intro");
+document.documentElement.classList.add("locked");
+let opened = false;
+function openInvite(withMusic){
+  if (opened) return; opened = true;
+  intro.classList.add("opening");
+  setTimeout(() => { intro.classList.add("gone"); document.documentElement.classList.remove("locked"); }, REDUCED ? 0 : 1300);
+  if (withMusic) music.ensure();
+}
+$("#env").addEventListener("click", () => openInvite(true));
+$("#openBtn").addEventListener("click", () => openInvite(true));
+// If nobody taps, open by itself so the page is never stuck behind the envelope.
+setTimeout(() => openInvite(true), REDUCED ? 600 : 5000);
+
+/* ---------- music: a soft tanpura drone with a slow melody, made in the browser ---------- */
+const music = (() => {
+  let ac, master, drones = [], timer, on = false, step = 4;
+  const SA = 261.63, SCALE = [1, 9/8, 5/4, 45/32, 3/2, 5/3, 15/8, 2, 9/4]; // a Yaman-like scale
+  function pluck(f, t, len){
+    const o = ac.createOscillator(), o2 = ac.createOscillator(), g = ac.createGain();
+    o.type = "triangle"; o.frequency.value = f; o2.type = "sine"; o2.frequency.value = f * 2;
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.22, t + 0.015); g.gain.exponentialRampToValueAtTime(0.0001, t + len);
+    o.connect(g); o2.connect(g); g.connect(master); o.start(t); o2.start(t); o.stop(t + len + 0.05); o2.stop(t + len + 0.05);
+  }
+  function phrase(){
+    if (ac.state !== "running") return;   // waiting for the guest's first tap
+    const t = ac.currentTime + 0.05;
+    for (let k = 0; k < 4; k++){
+      if (Math.random() < 0.2) continue;
+      step = Math.max(0, Math.min(SCALE.length - 1, step + [-2, -1, -1, 1, 1, 2][Math.floor(Math.random() * 6)]));
+      pluck(SA * SCALE[step], t + k * 0.55, 1.8);
+    }
+  }
+  function start(){
+    if (on) return;
+    try {
+      ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+      ac.resume();
+      master = ac.createGain(); master.gain.value = 0.0001; master.connect(ac.destination);
+      master.gain.exponentialRampToValueAtTime(0.5, ac.currentTime + 2.5);
+      const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 700; lp.connect(master);
+      drones = [SA / 2, SA * 3 / 4, SA].map((f, i) => {
+        const o = ac.createOscillator(), g = ac.createGain(); o.type = "sawtooth"; o.frequency.value = f; o.detune.value = i * 3;
+        g.gain.value = 0.035; o.connect(g); g.connect(lp); o.start(); return o;
+      });
+      phrase(); timer = setInterval(phrase, 2400);
+      on = true; ui();
+    } catch(e){ on = false; ui(); }
+  }
+  function stop(){
+    if (!ac) return;
+    clearInterval(timer);
+    const m = master; m.gain.setTargetAtTime(0.0001, ac.currentTime, 0.4);
+    const ds = drones; setTimeout(() => { ds.forEach(o => o.stop()); m.disconnect(); }, 1500);
+    on = false; ui();
+  }
+  function ui(){ const b = $("#music"); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); $("#musicTxt").textContent = on ? "Pause music" : "Play music"; }
+  $("#music").addEventListener("click", () => on ? stop() : start());
+  return { start, ensure(){ if (!on) start(); else if (ac && ac.state !== "running") ac.resume(); } };
+})();
+
+// Music plays by default. Browsers only allow sound after the guest touches the page,
+// so it starts right away where allowed, and otherwise on the first tap, key press or scroll.
+music.start();
+const kick = e => {
+  ["pointerdown", "keydown", "touchstart", "wheel"].forEach(t => removeEventListener(t, kick, true));
+  if (e.target.closest && e.target.closest("#music")) return;   // the music button handles itself
+  music.ensure();
+};
+["pointerdown", "keydown", "touchstart", "wheel"].forEach(t => addEventListener(t, kick, true));
+
+/* ---------- the hero scene: Pushkar lake at dusk, drawn live on a canvas ---------- */
+(() => {
+  const hero = $("#top"), cv = $("#scene"), cx = cv.getContext("2d");
+  let W = 0, H = 0, hz = 0, town = [], diyas = [], petals = [], birds = [], stars = [], last = 0, running = false;
+  const rng = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+
+  function layout(){
+    const r = hero.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+    W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const btn = $("#heroIn .btns").getBoundingClientRect().bottom - r.top;
+    hz = Math.min(H - 150, Math.max(H * 0.55, btn + 130));
+    const R = rng(11);
+    town = []; let x = -20;
+    while (x < W + 30){ const w = 22 + R() * 44; town.push({ x, w, h: 16 + R() * 46, k: R(), lit: [R(), R(), R()] }); x += w - 3; }
+    diyas = Array.from({ length: Math.max(8, Math.round(W / 55)) }, () => ({ x: R() * W, y: hz + 46 + R() * (H - hz - 56), s: .6 + R() * .8, ph: R() * 6, v: 3 + R() * 7 }));
+    petals = Array.from({ length: W < 600 ? 16 : 30 }, () => ({ x: R() * W, y: R() * H, r: 3 + R() * 3.5, vx: -8 + R() * 16, vy: 16 + R() * 22, a: R() * 6, va: -1.5 + R() * 3, c: R() < .5 ? "#e0607e" : "#f3a0b4" }));
+    birds = Array.from({ length: 5 }, () => ({ x: R() * W, y: hz * (.42 + R() * .3), s: 4 + R() * 4, v: 10 + R() * 12, ph: R() * 6 }));
+    stars = Array.from({ length: 60 }, () => ({ x: R() * W, y: R() * hz * .4, r: R() * 1.2 + .3, ph: R() * 6 }));
+  }
+
+  function hill(px, amp, spread, base, color, seed){
+    cx.beginPath(); cx.moveTo(0, base + 4);
+    for (let x = 0; x <= W; x += 8){
+      const y = base - amp * Math.exp(-Math.pow((x - px) / spread, 2)) - 14 * (.5 + .5 * Math.sin(x * .011 + seed)) - 8 * Math.sin(x * .031 + seed * 2);
+      cx.lineTo(x, y);
+    }
+    cx.lineTo(W, base + 4); cx.closePath(); cx.fillStyle = color; cx.fill();
+    return base - amp - 14;
+  }
+
+  function draw(t){
+    const s = t / 1000, dt = Math.min(.05, (t - last) / 1000 || 0); last = t;
+    // sky
+    let g = cx.createLinearGradient(0, 0, 0, hz);
+    g.addColorStop(0, "#1e0619"); g.addColorStop(.42, "#4b1240"); g.addColorStop(.74, "#a8384f"); g.addColorStop(1, "#f39a57");
+    cx.fillStyle = g; cx.fillRect(0, 0, W, hz + 2);
+    stars.forEach(st => { cx.globalAlpha = .35 + .35 * Math.sin(s * 1.4 + st.ph); cx.fillStyle = "#fff3d6"; cx.fillRect(st.x, st.y, st.r, st.r); });
+    cx.globalAlpha = 1;
+    // sun
+    const sx = W * .62, sr = Math.min(W, H) * .07 + 22, sy = hz - sr * .35;
+    g = cx.createRadialGradient(sx, sy, 0, sx, sy, sr * 5); g.addColorStop(0, "rgba(255,196,120,.55)"); g.addColorStop(1, "rgba(255,150,90,0)");
+    cx.fillStyle = g; cx.fillRect(0, 0, W, hz);
+    g = cx.createLinearGradient(0, sy - sr, 0, sy + sr); g.addColorStop(0, "#fff0b8"); g.addColorStop(1, "#f7a24a");
+    cx.fillStyle = g; cx.beginPath(); cx.arc(sx, sy, sr, 0, Math.PI * 2); cx.fill();
+    // Aravalli hills, Savitri temple on the far peak
+    const peakX = W * .84;
+    const peakY = hill(peakX, Math.min(150, H * .16), W * .14, hz - 6, "#8a3159", 1);
+    cx.fillStyle = "#5e1c45";
+    cx.fillRect(peakX - 7, peakY - 6, 14, 10);
+    cx.beginPath(); cx.moveTo(peakX - 6, peakY - 6); cx.quadraticCurveTo(peakX, peakY - 30, peakX, peakY - 30); cx.quadraticCurveTo(peakX, peakY - 30, peakX + 6, peakY - 6); cx.fill();
+    hill(W * .12, Math.min(90, H * .1), W * .2, hz - 2, "#62204c", 4);
+    // birds
+    cx.strokeStyle = "rgba(30,6,25,.75)"; cx.lineWidth = 1.6;
+    birds.forEach(b => {
+      const bx = (b.x + s * b.v) % (W + 60) - 30, flap = Math.sin(s * 6 + b.ph) * b.s * .6;
+      cx.beginPath(); cx.moveTo(bx - b.s, b.y - flap); cx.quadraticCurveTo(bx - b.s * .4, b.y - 1, bx, b.y + 1); cx.quadraticCurveTo(bx + b.s * .4, b.y - 1, bx + b.s, b.y - flap); cx.stroke();
+    });
+    // the town and its ghats
+    const ink = "#2a0b25";
+    town.forEach((b, i) => {
+      const top = hz - b.h;
+      cx.fillStyle = ink; cx.fillRect(b.x, top, b.w, b.h + 8);
+      if (b.k < .22){ // chhatri dome
+        cx.beginPath(); cx.arc(b.x + b.w / 2, top, b.w * .28, Math.PI, 0); cx.fill();
+        cx.fillRect(b.x + b.w / 2 - 1, top - b.w * .28 - 7, 2, 7);
+      } else if (b.k < .36){ // temple shikhara
+        const cxm = b.x + b.w / 2, sh = b.w * 1.1;
+        cx.beginPath(); cx.moveTo(b.x + b.w * .18, top); cx.quadraticCurveTo(b.x + b.w * .22, top - sh * .7, cxm, top - sh); cx.quadraticCurveTo(b.x + b.w * .78, top - sh * .7, b.x + b.w * .82, top); cx.fill();
+      } else if (b.k < .5){ // parapet with little arches
+        for (let a = b.x + 4; a < b.x + b.w - 4; a += 8){ cx.beginPath(); cx.arc(a + 3, top, 3, Math.PI, 0); cx.fill(); }
+      }
+      // lit windows
+      b.lit.forEach((l, j) => {
+        if (l > .45){ cx.fillStyle = `rgba(255,${190 + j * 15},110,${.55 + .35 * Math.sin(s * 2 + i + j)})`; cx.fillRect(b.x + 5 + j * (b.w - 12) / 3, top + 6 + (l * (b.h - 16)), 3.5, 5); }
+      });
+    });
+    // Brahma temple: the tall red spire with a flag
+    const bx = W * .3, bw = 46, bt = hz - 70;
+    cx.fillStyle = "#8d1f35";
+    cx.beginPath(); cx.moveTo(bx - bw / 2, hz); cx.lineTo(bx - bw / 2, bt + 20); cx.quadraticCurveTo(bx - bw * .4, bt - 40, bx, bt - 62); cx.quadraticCurveTo(bx + bw * .4, bt - 40, bx + bw / 2, bt + 20); cx.lineTo(bx + bw / 2, hz); cx.fill();
+    cx.fillStyle = "#f2b33d"; cx.beginPath(); cx.arc(bx, bt - 64, 3.5, 0, Math.PI * 2); cx.fill();
+    cx.strokeStyle = "#f2b33d"; cx.lineWidth = 1.2; cx.beginPath(); cx.moveTo(bx, bt - 66); cx.lineTo(bx, bt - 86); cx.stroke();
+    const wave = Math.sin(s * 3) * 3;
+    cx.fillStyle = "#f4a52b"; cx.beginPath(); cx.moveTo(bx, bt - 86); cx.quadraticCurveTo(bx + 9, bt - 84 + wave, bx + 18, bt - 80); cx.lineTo(bx, bt - 74); cx.fill();
+    // ghat steps
+    for (let k = 0; k < 4; k++){ cx.fillStyle = k % 2 ? "#4a173d" : "#3a1133"; cx.fillRect(0, hz + 8 + k * 5, W, 5); }
+    // the lake
+    const lt = hz + 28;
+    g = cx.createLinearGradient(0, lt, 0, H); g.addColorStop(0, "#7a2d52"); g.addColorStop(.35, "#3b1a45"); g.addColorStop(1, "#141633");
+    cx.fillStyle = g; cx.fillRect(0, lt, W, H - lt);
+    // sun's reflection
+    for (let y = lt + 2, i = 0; y < H; y += 6, i++){
+      const f = (y - lt) / (H - lt), ww = sr * (1.5 - f) * (.55 + .45 * Math.sin(s * 1.8 + i * .9));
+      cx.fillStyle = `rgba(255,190,110,${.42 * (1 - f)})`; cx.fillRect(sx - ww / 2 + Math.sin(s + i) * 6, y, ww, 2);
+    }
+    // floating diyas
+    diyas.forEach(d => {
+      const x = (d.x + s * d.v) % (W + 40) - 20, y = d.y + Math.sin(s * 1.3 + d.ph) * 1.5, fl = .8 + .2 * Math.sin(s * 9 + d.ph * 3);
+      g = cx.createRadialGradient(x, y - 3, 0, x, y - 3, 18 * d.s); g.addColorStop(0, "rgba(255,190,90,.5)"); g.addColorStop(1, "rgba(255,160,70,0)");
+      cx.fillStyle = g; cx.fillRect(x - 20 * d.s, y - 23 * d.s, 40 * d.s, 40 * d.s);
+      cx.fillStyle = "rgba(255,190,110,.25)"; cx.fillRect(x - 1, y + 3, 2, 10 * d.s);
+      cx.fillStyle = "#2a0b25"; cx.beginPath(); cx.ellipse(x, y + 1, 8 * d.s, 2.6 * d.s, 0, 0, Math.PI * 2); cx.fill();
+      cx.fillStyle = "#ffd77a"; cx.beginPath(); cx.ellipse(x, y - 3 * d.s, 1.8 * d.s, 4.2 * d.s * fl, 0, 0, Math.PI * 2); cx.fill();
+    });
+    // rose petals
+    petals.forEach(p => {
+      if (!REDUCED){ p.x += (p.vx + Math.sin(s + p.a) * 10) * dt; p.y += p.vy * dt; p.a += p.va * dt; if (p.y > H + 10){ p.y = -10; p.x = Math.random() * W; } }
+      cx.save(); cx.translate(p.x, p.y); cx.rotate(p.a); cx.fillStyle = p.c; cx.globalAlpha = .85;
+      cx.beginPath(); cx.ellipse(0, 0, p.r, p.r * .6, 0, 0, Math.PI * 2); cx.fill(); cx.restore();
+    });
+    cx.globalAlpha = 1;
+  }
+
+  function loop(t){ if (!running) return; draw(t); requestAnimationFrame(loop); }
+  function startLoop(){ if (REDUCED){ draw(0); return; } if (!running){ running = true; last = performance.now(); requestAnimationFrame(loop); } }
+  const relayout = () => { layout(); torans.forEach(buildToran); draw(performance.now()); };
+  layout(); draw(0);
+  new ResizeObserver(relayout).observe(hero);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
+  new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) startLoop(); else running = false; })).observe(hero);
+})();
+</script>
+</body>
+</html>
