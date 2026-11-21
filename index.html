@@ -305,7 +305,6 @@ footer a{color:var(--gold-2)}
     <a class="mono" href="#top" id="mono"></a>
     <nav>
       <a href="#events">Events</a>
-      <a href="#pushkar">Pushkar</a>
       <a href="#travel">Travel</a>
       <a href="#faq">FAQ</a>
       <a class="pill" href="#rsvp">RSVP</a>
@@ -351,17 +350,8 @@ footer a{color:var(--gold-2)}
   </div>
 </section>
 
-<!-- ============ PUSHKAR GUIDE ============ -->
-<section class="block" id="pushkar">
-  <div class="wrap">
-    <div class="sec-head"><span class="hi" lang="hi">पधारो म्हारे देस</span><h2>While You're in Pushkar</h2><div class="orn"><i></i></div>
-      <p>Pushkar is one of India's oldest towns, built around a sacred lake with 52 ghats. Come a day early if you can.</p></div>
-    <div class="guide" id="guideList"></div>
-  </div>
-</section>
-
 <!-- ============ TRAVEL ============ -->
-<section class="block" id="travel" style="padding-top:0">
+<section class="block" id="travel">
   <div class="wrap">
     <div class="sec-head"><span class="hi" lang="hi">यात्रा</span><h2>Getting There</h2><div class="orn"><i></i></div></div>
     <div class="facts" id="facts"></div>
@@ -498,14 +488,6 @@ const CONFIG = {
     { title: "To Pushkar by train", text: "Ajmer Junction (AII) has direct trains from Delhi, Mumbai, Jaipur and Ahmedabad. Pushkar is 30 minutes away over the Nag Pahar hills.", muted: "Cabs from the station cost about ₹600–800." },
     { title: "Where you'll stay", text: "Rooms are booked for you from 9 to 12 December. You'll get your room details on WhatsApp a week before.", muted: "SAMPLE: change this to your real arrangements." },
   ],
-  pushkar: [
-    { hindi: "पुष्कर सरोवर", title: "The lake and its ghats", text: "Go down to Varaha or Brahma Ghat at sunset for the evening aarti, when diyas float out across the water.", tip: "Shoes come off on the ghats, and please don't take photos of people bathing." },
-    { hindi: "ब्रह्मा मंदिर", title: "Brahma Temple", text: "One of the very few temples in the world to Lord Brahma, with a red spire you'll see from the lake.", tip: "Go early morning to skip the queue." },
-    { hindi: "सावित्री माता", title: "Savitri Mata Temple", text: "On Ratnagiri hill above town. Take the ropeway, or climb for about 45 minutes, for sunrise over the whole of Pushkar.", tip: "Start before dawn to catch the sunrise." },
-    { hindi: "सदर बाज़ार", title: "The bazaar", text: "Silver jewellery, bandhej dupattas, juttis and bottles of Pushkar rose water and gulkand to take home.", tip: "Bargain with a smile." },
-    { hindi: "मालपुआ", title: "What to eat", text: "Pushkar's famous malpua, hot kachori in the morning, and a glass of thick lassi in a kulhad.", tip: "Everything in town is vegetarian." },
-    { hindi: "गुलाब", title: "The rose fields", text: "Pushkar's rose gardens supply rose water and gulkand across India. The petals at our wedding will be from here.", tip: "Ask the driver to stop on the Ajmer road." },
-  ],
   faq: [
     { q: "Is Pushkar vegetarian?", a: "Yes. Pushkar is a holy town, so meat, eggs and alcohol aren't served anywhere in town. All wedding food is pure vegetarian." },
     { q: "What will the weather be like?", a: "December days are pleasant, around 24°C, but nights drop to about 8°C. Bring a warm shawl or jacket for the sangeet and the wedding night." },
@@ -613,7 +595,6 @@ $("#dayList").innerHTML = days.map((d, i) => `<div class="day">
   </article>`).join("")}</div></div>`).join("");
 
 /* ---------- Pushkar guide, travel, FAQ ---------- */
-$("#guideList").innerHTML = CONFIG.pushkar.map(p => `<div class="place rise"><span class="hi" lang="hi">${esc(p.hindi)}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p><p class="tip">${esc(p.tip)}</p></div>`).join("");
 $("#facts").innerHTML = CONFIG.facts.map(f => `<div class="fact"><b>${esc(f.big)}</b><span>${esc(f.small)}</span></div>`).join("");
 $("#travelList").innerHTML =
   [CONFIG.venue2, CONFIG.venue].map(v => `<div><h3>The venue</h3><p><b>${esc(v.name)}</b></p><p class="muted">${esc(v.address)}</p>
