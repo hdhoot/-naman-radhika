@@ -306,6 +306,8 @@ footer a{color:var(--gold-2)}
     <nav>
       <a href="#events">Events</a>
       <a href="#travel">Travel</a>
+      <a href="#faq">FAQ</a>
+      <a class="pill" href="#rsvp">RSVP</a>
     </nav>
   </div>
 </header>
@@ -321,7 +323,8 @@ footer a{color:var(--gold-2)}
     <p class="date" id="heroDate"></p>
     <div class="countdown" id="countdown"></div>
     <div class="btns">
-      <a class="btn" id="calAll" href="#" target="_blank" rel="noopener">Save the date</a>
+      <a class="btn" href="#rsvp">I'll be there</a>
+      <a class="btn ghost" id="calAll" href="#" target="_blank" rel="noopener">Save the date</a>
     </div>
   </div>
 </section>
@@ -353,6 +356,57 @@ footer a{color:var(--gold-2)}
     <div class="sec-head"><span class="hi" lang="hi">यात्रा</span><h2>Getting There</h2><div class="orn"><i></i></div></div>
     <div class="facts" id="facts"></div>
     <div class="travel" id="travelList"></div>
+  </div>
+</section>
+
+<!-- ============ RSVP ============ -->
+<section class="block rsvp-band" id="rsvp">
+  <div class="wrap">
+    <div class="sec-head"><span class="hi" lang="hi" style="color:var(--marigold)">आपका इंतज़ार है</span><h2>Will You Join Us?</h2><div class="orn"><i></i></div>
+      <p id="rsvpLead"></p></div>
+    <div class="form-card">
+      <form id="rsvpForm" novalidate>
+        <div>
+          <label for="r-name">Your full name</label>
+          <input class="field" id="r-name" name="name" autocomplete="name" placeholder="Full name">
+        </div>
+        <div>
+          <span class="lbl" id="sideLbl">You're family or friend of</span>
+          <div class="chips" role="radiogroup" aria-labelledby="sideLbl" id="sideChips"></div>
+        </div>
+        <div>
+          <span class="lbl" id="evLbl">Which celebrations will you attend?</span>
+          <div class="chips" role="group" aria-labelledby="evLbl" id="evChips"></div>
+        </div>
+        <div class="row2">
+          <div><label for="r-guests">Number of people (including you)</label><input class="field" id="r-guests" type="number" min="1" max="10" value="1"></div>
+          <div><label for="r-city">Travelling from</label><input class="field" id="r-city" placeholder="City"></div>
+        </div>
+        <div class="row2">
+          <div><label for="r-arrive">Arriving in Pushkar</label><input class="field" id="r-arrive" type="date"></div>
+          <div><label for="r-leave">Leaving on</label><input class="field" id="r-leave" type="date"></div>
+        </div>
+        <div><label for="r-note">A note for us (food needs, a song for the sangeet, a blessing)</label><textarea class="field" id="r-note" rows="3"></textarea></div>
+        <p class="err" id="r-err" role="alert"></p>
+        <div class="btns">
+          <button class="btn plum" type="submit" id="r-send">Send my RSVP</button>
+          <button class="btn outline" type="button" id="r-no">Sorry, I can't come</button>
+        </div>
+      </form>
+      <div class="thanks" id="thanks" hidden>
+        <h3 id="thanksTitle"></h3>
+        <p id="thanksText"></p>
+        <button class="btn outline" type="button" id="r-edit">Change my answer</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ + CHECKLIST ============ -->
+<section class="block" id="faq">
+  <div class="wrap two">
+    <div><h2>Good to Know</h2><div id="faqList"></div></div>
+    <div><h2>Your Packing List</h2><p style="margin:-8px 0 16px;color:var(--muted)">Tap to tick. Saved on this phone.</p><ul class="checks" id="checkList"></ul></div>
   </div>
 </section>
 
@@ -473,7 +527,7 @@ guest = guest.slice(0, 40);
 // With a name in the link the page greets that guest; without one it uses wording that suits every guest.
 if (guest) $("#inviteLine").innerHTML = `<span class="to-name">${esc(guest)}</span>,<br>you are warmly invited to the wedding of`;
 $(".intro .who").textContent = guest || "you";
-if (guest) { document.title = `${guest}, you're invited · ${couple}`; }
+if (guest) { $("#r-name").value = guest; document.title = `${guest}, you're invited · ${couple}`; }
 
 /* ---------- names everywhere ---------- */
 const ini = `${CONFIG.groom[0]}<span style="font-size:.7em"> &amp; </span>${CONFIG.bride[0]}`;
@@ -547,6 +601,61 @@ $("#travelList").innerHTML =
   [CONFIG.venue2, CONFIG.venue].map(v => `<div><h3>The venue</h3><p><b>${esc(v.name)}</b></p><p class="muted">${esc(v.address)}</p>
    <a class="btn outline" href="${esc(v.mapUrl)}" target="_blank" rel="noopener">Open in Maps</a></div>`).join("") +
   CONFIG.travel.map(t => `<div><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p><p class="muted">${esc(t.muted || "")}</p></div>`).join("");
+$("#faqList").innerHTML = CONFIG.faq.map((f, i) => `<details${i === 0 ? " open" : ""}><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join("");
+
+/* ---------- RSVP ---------- */
+$("#rsvpLead").textContent = `Please reply by ${CONFIG.rsvpBy}. You can come back and change your answer any time.`;
+$("#sideChips").innerHTML = CONFIG.sides.map((s, i) => `<label class="chip"><input type="radio" name="side" id="side-${i}" value="${esc(s)}"><span>${esc(s)}</span></label>`).join("");
+$("#evChips").innerHTML = CONFIG.events.map((e, i) => `<label class="chip"><input type="checkbox" name="ev" id="ev-${i}" value="${esc(e.name)}" checked><span>${esc(e.name)}</span></label>`).join("");
+$("#r-arrive").value = CONFIG.arriveBy; $("#r-leave").value = CONFIG.leaveOn;
+function send(p){
+  store.set("rsvp", JSON.stringify(p));
+  if (!CONFIG.sheetUrl || PREVIEW) return Promise.resolve(false);
+  return fetch(CONFIG.sheetUrl, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(p) })
+    .then(() => true, () => { store.set("rsvp-pending", JSON.stringify(p)); return false; });
+}
+function collect(attending){
+  return { time: new Date().toISOString(), invitedAs: guest, attending, name: $("#r-name").value.trim(),
+    side: (document.querySelector('input[name="side"]:checked') || {}).value || "",
+    events: attending === "yes" ? [...document.querySelectorAll('input[name="ev"]:checked')].map(i => i.value) : [],
+    guests: attending === "yes" ? Math.max(1, parseInt($("#r-guests").value, 10) || 1) : 0,
+    city: $("#r-city").value.trim(), arrive: $("#r-arrive").value, leave: $("#r-leave").value, note: $("#r-note").value.trim() };
+}
+function showThanks(p, sent){
+  $("#rsvpForm").hidden = true; $("#thanks").hidden = false;
+  const yes = p.attending === "yes";
+  $("#thanksTitle").textContent = yes ? `See you in ${CONFIG.city}, ${p.name.split(" ")[0]}!` : "We'll miss you";
+  $("#thanksText").textContent = (yes ? `You're down for ${p.events.join(", ")}${p.guests > 1 ? `, ${p.guests} people` : ""}. We'll message you about rooms and pickup.`
+      : "Thank you for telling us. We'll send you lots of photos.")
+    + (sent ? "" : CONFIG.sheetUrl && !PREVIEW ? " We couldn't reach the guest list just now and will try again next time you open this page." : " (Preview: your answer was saved only on this device.)");
+}
+$("#rsvpForm").addEventListener("submit", ev => {
+  ev.preventDefault();
+  const p = collect("yes");
+  if (!p.name) { $("#r-err").textContent = "Please write your name so we know who's coming."; $("#r-name").focus(); return; }
+  if (!p.events.length) { $("#r-err").textContent = "Pick at least one celebration, or tap \"Sorry, I can't come\"."; return; }
+  $("#r-err").textContent = ""; $("#r-send").disabled = true; $("#r-send").textContent = "Sending…";
+  send(p).then(ok => { $("#r-send").disabled = false; $("#r-send").textContent = "Send my RSVP"; showThanks(p, ok); });
+});
+$("#r-no").addEventListener("click", () => {
+  const p = collect("no");
+  if (!p.name) { $("#r-err").textContent = "Please write your name first."; $("#r-name").focus(); return; }
+  $("#r-err").textContent = ""; send(p).then(ok => showThanks(p, ok));
+});
+$("#r-edit").addEventListener("click", () => { $("#thanks").hidden = true; $("#rsvpForm").hidden = false; });
+try { const pend = JSON.parse(store.get("rsvp-pending") || "null"); if (pend && CONFIG.sheetUrl && !PREVIEW) send(pend).then(ok => ok && store.set("rsvp-pending", "")); } catch(e){}
+
+/* ---------- checklist ---------- */
+let ticks; try { ticks = new Set(JSON.parse(store.get("ticks") || "[]")); } catch(e){ ticks = new Set(); }
+function drawChecks(){
+  $("#checkList").innerHTML = CONFIG.checklist.map((c, i) => `<li><button type="button" id="chk-${i}" class="${ticks.has(i) ? "done" : ""}" aria-pressed="${ticks.has(i)}"><span class="box"></span><span class="txt">${esc(c)}</span></button></li>`).join("");
+}
+drawChecks();
+$("#checkList").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  const i = +b.id.slice(4); ticks.has(i) ? ticks.delete(i) : ticks.add(i);
+  store.set("ticks", JSON.stringify([...ticks])); drawChecks(); $("#chk-" + i).focus();
+});
 
 /* ---------- footer ---------- */
 if (CONFIG.waGroup) $("#waLink").href = CONFIG.waGroup; else $("#waWrap").hidden = true;
