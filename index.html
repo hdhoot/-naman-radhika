@@ -452,6 +452,7 @@ const CONFIG = {
     "Your RSVP, sent",
   ],
   contacts: [],    // add later, e.g. { who: "Name · relation", phone: "+91 ..." }
+  musicFile: "music.mp3",   // your song: put the MP3 next to index.html with this name
   waGroup: "",     // paste your WhatsApp group invite link
   sheetUrl: "",    // Google Apps Script web-app URL for RSVPs (see apps-script.gs and README.md)
 };
@@ -602,7 +603,19 @@ const music = (() => {
       pluck(SA * SCALE[step], t + k * 0.55, 1.8);
     }
   }
+  // Your own song (CONFIG.musicFile) plays if the file is there; otherwise the built-in tune plays.
+  const track = CONFIG.musicFile ? new Audio(CONFIG.musicFile) : null;
+  let useTrack = !!track;
+  if (track){
+    track.loop = true; track.volume = 0.7; track.preload = "auto";
+    track.addEventListener("error", () => { const was = on; useTrack = false; on = false; if (was) startSynth(); });
+  }
   function start(){
+    if (on) return;
+    if (useTrack){ on = true; ui(); track.play().catch(() => {}); return; }
+    startSynth();
+  }
+  function startSynth(){
     if (on) return;
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
@@ -619,6 +632,7 @@ const music = (() => {
     } catch(e){ on = false; ui(); }
   }
   function stop(){
+    if (useTrack){ track.pause(); on = false; ui(); return; }
     if (!ac) return;
     clearInterval(timer);
     const m = master; m.gain.setTargetAtTime(0.0001, ac.currentTime, 0.4);
@@ -627,7 +641,11 @@ const music = (() => {
   }
   function ui(){ const b = $("#music"); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); $("#musicTxt").textContent = on ? "Pause music" : "Play music"; }
   $("#music").addEventListener("click", () => on ? stop() : start());
-  return { start, ensure(){ if (!on) start(); else if (ac && ac.state !== "running") ac.resume(); } };
+  return { start, ensure(){
+    if (!on) start();
+    else if (useTrack && track.paused) track.play().catch(() => {});
+    else if (!useTrack && ac && ac.state !== "running") ac.resume();
+  } };
 })();
 
 // Music plays by default. Browsers only allow sound after the guest touches the page,
