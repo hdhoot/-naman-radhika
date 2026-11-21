@@ -32,3 +32,11 @@ In a Google Sheet, put guest names in column A and this formula in B2, then drag
     ="https://<your-username>.github.io/wedding/?name="&ENCODEURL(A2)
 
 Each guest sees "Dear <their name>," and their name is pre-filled in the RSVP.
+
+## 5. Two guest lists: Jodhpur and Pushkar
+- 30 November guests (Surpura Bagh, Jodhpur): `https://hdhoot.github.io/-naman-radhika/?for=jodhpur&name=Ravi`
+- 10 & 11 December guests (Taj Pushkar): `https://hdhoot.github.io/-naman-radhika/?for=pushkar&name=Ravi`
+- Guests invited to both: leave out `for=` and they see all six events.
+
+Each link shows only its own events, letter, travel and FAQ. RSVPs go to separate tabs:
+**RSVP Jodhpur**, **RSVP Pushkar** and **RSVP** (for the all-events link).

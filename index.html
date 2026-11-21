@@ -377,7 +377,7 @@ footer a{color:var(--gold-2)}
           <div><label for="r-city">Travelling from</label><input class="field" id="r-city" placeholder="City"></div>
         </div>
         <div class="row2">
-          <div><label for="r-arrive">Arriving in Pushkar</label><input class="field" id="r-arrive" type="date"></div>
+          <div><label for="r-arrive" id="arriveLabel">Arriving in Pushkar</label><input class="field" id="r-arrive" type="date"></div>
           <div><label for="r-leave">Leaving on</label><input class="field" id="r-leave" type="date"></div>
         </div>
         <div><label for="r-note">A note for us (food needs, a song for the sangeet, a blessing)</label><textarea class="field" id="r-note" rows="3"></textarea></div>
@@ -488,34 +488,57 @@ const CONFIG = {
     address: "Jodhpur, Rajasthan · 30 November",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=Surpura+Bagh+Jodhpur",
   },
+  // Items marked for: "jodhpur" or for: "pushkar" show only on that invitation; the rest show on both.
   facts: [
-    { big: "~8°C", small: "December nights" },
-    { big: "45 km", small: "from Kishangarh airport" },
-    { big: "15 km", small: "from Ajmer Junction" },
-    { big: "Veg", small: "Pushkar is an all-vegetarian holy town" },
+    { for: "pushkar", big: "~8°C", small: "December nights" },
+    { for: "pushkar", big: "45 km", small: "from Kishangarh airport" },
+    { for: "pushkar", big: "15 km", small: "from Ajmer Junction" },
+    { for: "pushkar", big: "Veg", small: "Pushkar is an all-vegetarian holy town" },
   ],
   travel: [
-    { title: "To Jodhpur (30 November)", text: "Jodhpur Airport (JDH) and Jodhpur Junction railway station both have direct connections from Delhi, Mumbai and Jaipur.", muted: "Send us your travel details and we'll arrange your pickup." },
-    { title: "To Pushkar by air", text: "Kishangarh Airport (KQH) is the closest, about an hour away. Jaipur (JAI) has more flights and is about 3 hours by road.", muted: "Send us your flight details and we'll arrange your pickup." },
-    { title: "To Pushkar by train", text: "Ajmer Junction (AII) has direct trains from Delhi, Mumbai, Jaipur and Ahmedabad. Pushkar is 30 minutes away over the Nag Pahar hills.", muted: "Cabs from the station cost about ₹600–800." },
+    { for: "jodhpur", title: "To Jodhpur (30 November)", text: "Jodhpur Airport (JDH) and Jodhpur Junction railway station both have direct connections from Delhi, Mumbai and Jaipur.", muted: "Send us your travel details and we'll arrange your pickup." },
+    { for: "pushkar", title: "To Pushkar by air", text: "Kishangarh Airport (KQH) is the closest, about an hour away. Jaipur (JAI) has more flights and is about 3 hours by road.", muted: "Send us your flight details and we'll arrange your pickup." },
+    { for: "pushkar", title: "To Pushkar by train", text: "Ajmer Junction (AII) has direct trains from Delhi, Mumbai, Jaipur and Ahmedabad. Pushkar is 30 minutes away over the Nag Pahar hills.", muted: "Cabs from the station cost about ₹600–800." },
   ],
   faq: [
-    { q: "Is Pushkar vegetarian?", a: "Yes. Pushkar is a holy town, so meat, eggs and alcohol aren't served anywhere in town. All wedding food is pure vegetarian." },
-    { q: "What will the weather be like?", a: "December days are pleasant, around 24°C, but nights drop to about 8°C. Bring a warm shawl or jacket for the sangeet and the wedding night." },
+    { for: "pushkar", q: "Is Pushkar vegetarian?", a: "Yes. Pushkar is a holy town, so meat, eggs and alcohol aren't served anywhere in town. All wedding food is pure vegetarian." },
+    { for: "pushkar", q: "What will the weather be like?", a: "December days are pleasant, around 24°C, but nights drop to about 8°C. Bring a warm shawl or jacket for the sangeet and the wedding night." },
+    { for: "jodhpur", q: "What will the weather be like?", a: "Late November in Jodhpur is pleasant: warm days around 28°C and cool evenings around 14°C. A light shawl helps for the reception." },
     { q: "Can I bring someone?", a: "Your invitation is for the people named on it. If you'd like to bring someone, message us before you RSVP." },
-    { q: "Will there be pickup from the airport or station?", a: "Yes, from Kishangarh airport, Jaipur airport and Ajmer Junction. Add your travel dates in the RSVP and we'll message you the details." },
+    { for: "pushkar", q: "Will there be pickup from the airport or station?", a: "Yes, from Kishangarh airport, Jaipur airport and Ajmer Junction. Add your travel dates in the RSVP and we'll message you the details." },
+    { for: "jodhpur", q: "Will there be pickup from the airport or station?", a: "Yes, from Jodhpur airport and Jodhpur Junction. Add your travel dates in the RSVP and we'll message you the details." },
     { q: "Are kids welcome?", a: "Of course. Include them in your number of people when you RSVP." },
   ],
   sides: ["Naman's side", "Radhika's side", "Both!"],
   rsvpBy: "25 November 2026",
   checklist: [
-    "An outfit for each of the six events (see the dress codes)",
+    "An outfit for each celebration (see the dress codes)",
     "A photo ID for hotel check-in",
-    "A shawl or jacket for cold Pushkar nights",
-    "Comfortable shoes for the baraat, and ones easy to slip off at the ghats",
+    { for: "pushkar", text: "A shawl or jacket for cold Pushkar nights" },
+    { for: "jodhpur", text: "A light shawl for the evening" },
+    { for: "pushkar", text: "Comfortable shoes for the baraat, and ones easy to slip off at the ghats" },
     "A little cash for the bazaar",
     "Your RSVP, sent",
   ],
+
+  // Two guest lists, two links. Send ...?for=jodhpur to the 30 November guests and ...?for=pushkar
+  // to the 10 & 11 December guests. A link without for= shows everything. Each list gets its own sheet tab.
+  invites: {
+    jodhpur: {
+      title: "Jodhpur", city: "Jodhpur", dateText: "30 November 2026",
+      saveDate: { from: "2026-11-30", to: "2026-11-30" }, arriveBy: "2026-11-29", leaveOn: "2026-12-01",
+      where: "==Surpura Bagh, Jodhpur on 30 November==",
+      eventsLead: "Battisi in the morning and the reception in the evening, both at Surpura Bagh, Jodhpur. Each celebration has its own dress code.",
+      events: ["Battisi", "Reception"],
+    },
+    pushkar: {
+      title: "Pushkar", city: "Pushkar", dateText: "10 & 11 December 2026",
+      saveDate: { from: "2026-12-10", to: "2026-12-11" }, arriveBy: "2026-12-09", leaveOn: "2026-12-12",
+      where: "==Taj Pushkar on 10 & 11 December==",
+      eventsLead: "Two days at Taj Pushkar: the carnival and sangeet on 10 December, then the mayra and the wedding on 11 December. Each celebration has its own dress code.",
+      events: ["Carnival", "Sangeet", "Mayra", "Wedding"],
+    },
+  },
   contacts: [],    // add later, e.g. { who: "Name · relation", phone: "+91 ..." }
   musicFile: "music.mp3",   // your song: put the MP3 next to index.html with this name
   waGroup: "",     // paste your WhatsApp group invite link
@@ -529,11 +552,31 @@ const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const PREVIEW = location.protocol === "file:" || /^(localhost|127\.0\.0\.1)$|claude\.ai$|claudeusercontent\.com$/.test(location.hostname);
 const couple = `${CONFIG.groom} & ${CONFIG.bride}`;
+const qs = new URLSearchParams(location.search);
+
+/* ---------- which invitation? ?for=jodhpur or ?for=pushkar (or #jodhpur / #pushkar-for-Name) ---------- */
+const wanted = (qs.get("for") || qs.get("invite") || (location.hash.match(/jodhpur|pushkar/i) || [""])[0]).toLowerCase();
+const INVITE = wanted.startsWith("j") ? "jodhpur" : wanted.startsWith("p") ? "pushkar" : "";
+const keep = list => list.filter(x => !INVITE || !x.for || x.for === INVITE);
+let eventsLead = "";
+if (INVITE){
+  const I = CONFIG.invites[INVITE];
+  Object.assign(CONFIG, { city: I.city, dateText: I.dateText, saveDate: I.saveDate, arriveBy: I.arriveBy, leaveOn: I.leaveOn });
+  CONFIG.letter = CONFIG.letter.map((p, i) => i === 1 ? `Celebrate with us at ${I.where}.` : p);
+  CONFIG.events = CONFIG.events.filter(e => I.events.includes(e.name));
+  if (INVITE === "jodhpur") CONFIG.venue = CONFIG.venue2;
+  CONFIG.venue2 = null;
+  eventsLead = I.eventsLead;
+  document.title = `${couple}, ${I.city}`;
+}
+["facts", "travel", "faq", "checklist"].forEach(k => CONFIG[k] = keep(CONFIG[k]));
+CONFIG.checklist = CONFIG.checklist.map(c => typeof c === "string" ? c : c.text);
+const KEY = INVITE ? "-" + INVITE : "";   // each invitation remembers its own RSVP on this phone
 
 /* ---------- who is this for? ?name=Harshit (or #for-Harshit) ---------- */
-const qs = new URLSearchParams(location.search);
 let guest = (qs.get("name") || qs.get("to") || "").trim();
-if (!guest && /^#for-/.test(location.hash)) guest = decodeURIComponent(location.hash.slice(5)).replace(/[-_]+/g, " ").trim();
+const hashName = location.hash.match(/(?:^#|-)for-(.+)$/);
+if (!guest && hashName) guest = decodeURIComponent(hashName[1]).replace(/[-_]+/g, " ").trim();
 guest = guest.slice(0, 40);
 // With a name in the link the page greets that guest; without one it uses wording that suits every guest.
 if (guest) $("#inviteLine").innerHTML = `<span class="to-name">${esc(guest)}</span>,<br>you are warmly invited to the wedding of`;
@@ -591,7 +634,7 @@ const ICONS = {
   carnival:'<circle cx="12" cy="10" r="7"/><path d="M12 3v14M5 10h14M7.1 5.1l9.8 9.8M16.9 5.1l-9.8 9.8"/><path d="M8 22l4-5 4 5"/>',
 };
 const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[k] || ICONS.pheras}</svg>`;
-$("#eventsLead").textContent = `It starts on 30 November with Battisi and the reception at ${CONFIG.venue2.name}, then two days at ${CONFIG.venue.name}. Each celebration has its own dress code.`;
+$("#eventsLead").textContent = eventsLead || `It starts on 30 November with Battisi and the reception at ${CONFIG.venue2.name}, then two days at ${CONFIG.venue.name}. Each celebration has its own dress code.`;
 const days = [];
 CONFIG.events.forEach(e => { let d = days.find(x => x.date === e.date); if (!d) days.push(d = { date: e.date, list: [] }); d.list.push(e); });
 $("#dayList").innerHTML = days.map((d, i) => `<div class="day">
@@ -607,9 +650,10 @@ $("#dayList").innerHTML = days.map((d, i) => `<div class="day">
   </article>`).join("")}</div></div>`).join("");
 
 /* ---------- Pushkar guide, travel, FAQ ---------- */
+$("#facts").hidden = !CONFIG.facts.length;
 $("#facts").innerHTML = CONFIG.facts.map(f => `<div class="fact"><b>${esc(f.big)}</b><span>${esc(f.small)}</span></div>`).join("");
 $("#travelList").innerHTML =
-  [CONFIG.venue2, CONFIG.venue].map(v => `<div><h3>The venue</h3><p><b>${esc(v.name)}</b></p><p class="muted">${esc(v.address)}</p>
+  [CONFIG.venue2, CONFIG.venue].filter(Boolean).map(v => `<div><h3>The venue</h3><p><b>${esc(v.name)}</b></p><p class="muted">${esc(v.address)}</p>
    <a class="btn outline" href="${esc(v.mapUrl)}" target="_blank" rel="noopener">Open in Maps</a></div>`).join("") +
   CONFIG.travel.map(t => `<div><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p><p class="muted">${esc(t.muted || "")}</p></div>`).join("");
 $("#faqList").innerHTML = CONFIG.faq.map((f, i) => `<details${i === 0 ? " open" : ""}><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join("");
@@ -618,15 +662,16 @@ $("#faqList").innerHTML = CONFIG.faq.map((f, i) => `<details${i === 0 ? " open" 
 $("#rsvpLead").textContent = `Please reply by ${CONFIG.rsvpBy}. You can come back and change your answer any time.`;
 $("#sideChips").innerHTML = CONFIG.sides.map((s, i) => `<label class="chip"><input type="radio" name="side" id="side-${i}" value="${esc(s)}"><span>${esc(s)}</span></label>`).join("");
 $("#evChips").innerHTML = CONFIG.events.map((e, i) => `<label class="chip"><input type="checkbox" name="ev" id="ev-${i}" value="${esc(e.name)}" checked><span>${esc(e.name)}</span></label>`).join("");
+$("#arriveLabel").textContent = INVITE ? `Arriving in ${CONFIG.city}` : "Arriving on";
 $("#r-arrive").value = CONFIG.arriveBy; $("#r-leave").value = CONFIG.leaveOn;
 function send(p){
-  store.set("rsvp", JSON.stringify(p));
+  store.set("rsvp" + KEY, JSON.stringify(p));
   if (!CONFIG.sheetUrl || PREVIEW) return Promise.resolve(false);
   return fetch(CONFIG.sheetUrl, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(p) })
-    .then(() => true, () => { store.set("rsvp-pending", JSON.stringify(p)); return false; });
+    .then(() => true, () => { store.set("rsvp-pending" + KEY, JSON.stringify(p)); return false; });
 }
 function collect(attending){
-  return { time: new Date().toISOString(), invitedAs: guest, attending, name: $("#r-name").value.trim(),
+  return { time: new Date().toISOString(), invite: INVITE || "all", invitedAs: guest, attending, name: $("#r-name").value.trim(),
     family: $("#r-family").value.trim(), phone: $("#r-phone").value.replace(/\D/g, "").slice(-10),
     side: (document.querySelector('input[name="side"]:checked') || {}).value || "",
     events: attending === "yes" ? [...document.querySelectorAll('input[name="ev"]:checked')].map(i => i.value) : [],
@@ -664,7 +709,7 @@ $("#r-no").addEventListener("click", () => {
 $("#r-edit").addEventListener("click", () => { $("#thanks").hidden = true; $("#rsvpForm").hidden = false; });
 // Someone in this family already replied on this phone: show their answer, with the form one tap away.
 try {
-  const prev = JSON.parse(store.get("rsvp") || "null");
+  const prev = JSON.parse(store.get("rsvp" + KEY) || "null");
   if (prev && prev.phone){
     $("#r-family").value = prev.family || ""; $("#r-name").value = prev.name || ""; $("#r-phone").value = prev.phone;
     $("#r-guests").value = prev.guests || 1; $("#r-city").value = prev.city || ""; $("#r-note").value = prev.note || "";
@@ -675,10 +720,10 @@ try {
     $("#thanksText").textContent = "Your family's RSVP is already in. Tap below if you need to change it. It will update the same reply.";
   }
 } catch(e){}
-try { const pend = JSON.parse(store.get("rsvp-pending") || "null"); if (pend && CONFIG.sheetUrl && !PREVIEW) send(pend).then(ok => ok && store.set("rsvp-pending", "")); } catch(e){}
+try { const pend = JSON.parse(store.get("rsvp-pending" + KEY) || "null"); if (pend && CONFIG.sheetUrl && !PREVIEW) send(pend).then(ok => ok && store.set("rsvp-pending" + KEY, "")); } catch(e){}
 
 /* ---------- checklist ---------- */
-let ticks; try { ticks = new Set(JSON.parse(store.get("ticks") || "[]")); } catch(e){ ticks = new Set(); }
+let ticks; try { ticks = new Set(JSON.parse(store.get("ticks" + KEY) || "[]")); } catch(e){ ticks = new Set(); }
 function drawChecks(){
   $("#checkList").innerHTML = CONFIG.checklist.map((c, i) => `<li><button type="button" id="chk-${i}" class="${ticks.has(i) ? "done" : ""}" aria-pressed="${ticks.has(i)}"><span class="box"></span><span class="txt">${esc(c)}</span></button></li>`).join("");
 }
@@ -686,7 +731,7 @@ drawChecks();
 $("#checkList").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   const i = +b.id.slice(4); ticks.has(i) ? ticks.delete(i) : ticks.add(i);
-  store.set("ticks", JSON.stringify([...ticks])); drawChecks(); $("#chk-" + i).focus();
+  store.set("ticks" + KEY, JSON.stringify([...ticks])); drawChecks(); $("#chk-" + i).focus();
 });
 
 /* ---------- footer ---------- */

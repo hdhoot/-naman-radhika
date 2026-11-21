@@ -2,12 +2,13 @@
  * RSVP receiver for the wedding invitation.
  * One row per family: a reply with a mobile number that is already in the sheet
  * updates that family's row instead of adding a new one.
+ * Jodhpur (30 Nov) and Pushkar (10 & 11 Dec) replies go to separate tabs: "RSVP Jodhpur" and "RSVP Pushkar".
  *
  * Setup: Google Sheet → Extensions → Apps Script → paste this → Save.
  * Deploy → New deployment → Web app (Execute as: Me, Who has access: Anyone).
  * After changing this code: Deploy → Manage deployments → ✏️ Edit → Version: New version → Deploy.
  */
-const SHEET_NAME = "RSVP";
+const TABS = { jodhpur: "RSVP Jodhpur", pushkar: "RSVP Pushkar", all: "RSVP" };
 const HEADERS = ["First replied", "Last updated", "Invited as", "Family", "Name", "Mobile", "Attending",
                  "Side", "Events", "People", "From city", "Arriving", "Leaving", "Note", "Times submitted"];
 const MOBILE_COL = 6;   // column F
@@ -16,12 +17,13 @@ function doPost(e) {
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
+    const d = JSON.parse(e.postData.contents);
+    const tab = TABS[d.invite] || TABS.all;
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const sh = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
+    const sh = ss.getSheetByName(tab) || ss.insertSheet(tab);
     sh.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight("bold");
     sh.setFrozenRows(1);
 
-    const d = JSON.parse(e.postData.contents);
     const mobile = String(d.phone || "").replace(/\D/g, "").slice(-10);
     const now = new Date();
     const row = [now, now, d.invitedAs || "", d.family || "", d.name || "", mobile ? "'" + mobile : "",
