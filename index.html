@@ -242,6 +242,9 @@ label,.lbl{font-weight:700;font-size:15px;display:block;margin-bottom:6px;color:
 .chip span{display:inline-block;padding:8px 16px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-size:15px;cursor:pointer}
 .chip input:checked + span{background:var(--plum);border-color:var(--plum);color:var(--gold-2);font-weight:700}
 .chip input:focus-visible + span{outline:3px solid var(--marigold);outline-offset:2px}
+.family-note{display:grid;gap:4px;margin-bottom:22px;padding:14px 16px;border-radius:10px;background:#fff3d6;border:1.5px dashed var(--marigold)}
+.family-note b:first-child{font-family:var(--f-head);font-size:15px;letter-spacing:.06em;color:var(--maroon)}
+.family-note p{margin:0;font-size:15px;color:var(--ink)}
 .err{color:#b0123c;min-height:1.4em;margin:0;font-size:15px;font-weight:500}
 .form-card .btns{justify-content:flex-start;margin-top:0}
 .thanks{text-align:center;display:grid;gap:10px;justify-items:center}
@@ -341,34 +344,25 @@ footer a{color:var(--gold-2)}
   </div>
 </section>
 
-<!-- ============ EVENTS ============ -->
-<section class="block events-band" id="events">
-  <div class="wrap">
-    <div class="sec-head"><span class="hi" lang="hi">शुभ मुहूर्त</span><h2>The Celebrations</h2><div class="orn"><i></i></div>
-      <p id="eventsLead"></p></div>
-    <div id="dayList"></div>
-  </div>
-</section>
-
-<!-- ============ TRAVEL ============ -->
-<section class="block" id="travel">
-  <div class="wrap">
-    <div class="sec-head"><span class="hi" lang="hi">यात्रा</span><h2>Getting There</h2><div class="orn"><i></i></div></div>
-    <div class="facts" id="facts"></div>
-    <div class="travel" id="travelList"></div>
-  </div>
-</section>
-
 <!-- ============ RSVP ============ -->
 <section class="block rsvp-band" id="rsvp">
   <div class="wrap">
     <div class="sec-head"><span class="hi" lang="hi" style="color:var(--marigold)">आपका इंतज़ार है</span><h2>Will You Join Us?</h2><div class="orn"><i></i></div>
       <p id="rsvpLead"></p></div>
     <div class="form-card">
+      <div class="family-note" role="note">
+        <b>One RSVP per family, please</b>
+        <p>Only one person fills this in for the whole family. Put everyone's count in "Number of people".
+        Need to change something later? Fill it again with the <b>same mobile number</b> and we'll update your family's earlier reply instead of adding a new one.</p>
+      </div>
       <form id="rsvpForm" novalidate>
+        <div class="row2">
+          <div><label for="r-family">Family name</label><input class="field" id="r-family" placeholder="e.g. Maheshwari family, Jaipur"></div>
+          <div><label for="r-name">Your full name</label><input class="field" id="r-name" name="name" autocomplete="name" placeholder="Full name"></div>
+        </div>
         <div>
-          <label for="r-name">Your full name</label>
-          <input class="field" id="r-name" name="name" autocomplete="name" placeholder="Full name">
+          <label for="r-phone">Mobile number (one per family)</label>
+          <input class="field" id="r-phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="10-digit mobile number">
         </div>
         <div>
           <span class="lbl" id="sideLbl">You're family or friend of</span>
@@ -379,7 +373,7 @@ footer a{color:var(--gold-2)}
           <div class="chips" role="group" aria-labelledby="evLbl" id="evChips"></div>
         </div>
         <div class="row2">
-          <div><label for="r-guests">Number of people (including you)</label><input class="field" id="r-guests" type="number" min="1" max="10" value="1"></div>
+          <div><label for="r-guests">Number of people in your family coming</label><input class="field" id="r-guests" type="number" min="1" max="10" value="1"></div>
           <div><label for="r-city">Travelling from</label><input class="field" id="r-city" placeholder="City"></div>
         </div>
         <div class="row2">
@@ -399,6 +393,24 @@ footer a{color:var(--gold-2)}
         <button class="btn outline" type="button" id="r-edit">Change my answer</button>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ EVENTS ============ -->
+<section class="block events-band" id="events">
+  <div class="wrap">
+    <div class="sec-head"><span class="hi" lang="hi">शुभ मुहूर्त</span><h2>The Celebrations</h2><div class="orn"><i></i></div>
+      <p id="eventsLead"></p></div>
+    <div id="dayList"></div>
+  </div>
+</section>
+
+<!-- ============ TRAVEL ============ -->
+<section class="block" id="travel">
+  <div class="wrap">
+    <div class="sec-head"><span class="hi" lang="hi">यात्रा</span><h2>Getting There</h2><div class="orn"><i></i></div></div>
+    <div class="facts" id="facts"></div>
+    <div class="travel" id="travelList"></div>
   </div>
 </section>
 
@@ -615,33 +627,54 @@ function send(p){
 }
 function collect(attending){
   return { time: new Date().toISOString(), invitedAs: guest, attending, name: $("#r-name").value.trim(),
+    family: $("#r-family").value.trim(), phone: $("#r-phone").value.replace(/\D/g, "").slice(-10),
     side: (document.querySelector('input[name="side"]:checked') || {}).value || "",
     events: attending === "yes" ? [...document.querySelectorAll('input[name="ev"]:checked')].map(i => i.value) : [],
     guests: attending === "yes" ? Math.max(1, parseInt($("#r-guests").value, 10) || 1) : 0,
     city: $("#r-city").value.trim(), arrive: $("#r-arrive").value, leave: $("#r-leave").value, note: $("#r-note").value.trim() };
 }
+function check(p){
+  const err = (msg, id) => { $("#r-err").textContent = msg; $(id).focus(); return false; };
+  if (!p.family) return err("Please write your family name.", "#r-family");
+  if (!p.name) return err("Please write your name so we know who filled this in.", "#r-name");
+  if (p.phone.length !== 10) return err("Please enter a 10-digit mobile number. We use it to keep one reply per family.", "#r-phone");
+  return true;
+}
 function showThanks(p, sent){
   $("#rsvpForm").hidden = true; $("#thanks").hidden = false;
   const yes = p.attending === "yes";
   $("#thanksTitle").textContent = yes ? `See you in ${CONFIG.city}, ${p.name.split(" ")[0]}!` : "We'll miss you";
-  $("#thanksText").textContent = (yes ? `You're down for ${p.events.join(", ")}${p.guests > 1 ? `, ${p.guests} people` : ""}. We'll message you about rooms and pickup.`
+  $("#thanksText").textContent = (yes ? `${p.family}: ${p.guests} ${p.guests > 1 ? "people" : "person"} for ${p.events.join(", ")}. We'll message you on ${p.phone} about rooms and pickup.`
       : "Thank you for telling us. We'll send you lots of photos.")
     + (sent ? "" : CONFIG.sheetUrl && !PREVIEW ? " We couldn't reach the guest list just now and will try again next time you open this page." : " (Preview: your answer was saved only on this device.)");
 }
 $("#rsvpForm").addEventListener("submit", ev => {
   ev.preventDefault();
   const p = collect("yes");
-  if (!p.name) { $("#r-err").textContent = "Please write your name so we know who's coming."; $("#r-name").focus(); return; }
+  if (!check(p)) return;
   if (!p.events.length) { $("#r-err").textContent = "Pick at least one celebration, or tap \"Sorry, I can't come\"."; return; }
   $("#r-err").textContent = ""; $("#r-send").disabled = true; $("#r-send").textContent = "Sending…";
   send(p).then(ok => { $("#r-send").disabled = false; $("#r-send").textContent = "Send my RSVP"; showThanks(p, ok); });
 });
 $("#r-no").addEventListener("click", () => {
   const p = collect("no");
-  if (!p.name) { $("#r-err").textContent = "Please write your name first."; $("#r-name").focus(); return; }
+  if (!check(p)) return;
   $("#r-err").textContent = ""; send(p).then(ok => showThanks(p, ok));
 });
 $("#r-edit").addEventListener("click", () => { $("#thanks").hidden = true; $("#rsvpForm").hidden = false; });
+// Someone in this family already replied on this phone: show their answer, with the form one tap away.
+try {
+  const prev = JSON.parse(store.get("rsvp") || "null");
+  if (prev && prev.phone){
+    $("#r-family").value = prev.family || ""; $("#r-name").value = prev.name || ""; $("#r-phone").value = prev.phone;
+    $("#r-guests").value = prev.guests || 1; $("#r-city").value = prev.city || ""; $("#r-note").value = prev.note || "";
+    if (prev.arrive) $("#r-arrive").value = prev.arrive; if (prev.leave) $("#r-leave").value = prev.leave;
+    document.querySelectorAll('input[name="side"]').forEach(i => i.checked = i.value === prev.side);
+    if (prev.attending === "yes") document.querySelectorAll('input[name="ev"]').forEach(i => i.checked = (prev.events || []).includes(i.value));
+    showThanks(prev, true);
+    $("#thanksText").textContent = "Your family's RSVP is already in. Tap below if you need to change it. It will update the same reply.";
+  }
+} catch(e){}
 try { const pend = JSON.parse(store.get("rsvp-pending") || "null"); if (pend && CONFIG.sheetUrl && !PREVIEW) send(pend).then(ok => ok && store.set("rsvp-pending", "")); } catch(e){}
 
 /* ---------- checklist ---------- */
