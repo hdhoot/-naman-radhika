@@ -10,7 +10,7 @@
  */
 const TABS = { jodhpur: "RSVP Jodhpur", pushkar: "RSVP Pushkar", all: "RSVP" };
 const HEADERS = ["First replied", "Last updated", "Invited as", "Family", "Name", "Mobile", "Attending",
-                 "Side", "Events", "People", "From city", "Arriving", "Leaving", "Note", "Times submitted"];
+                 "Side", "Events", "People", "From city", "Arriving", "Leaving", "Note", "Times submitted", "From Jodhpur"];
 const MOBILE_COL = 6;   // column F
 
 function doPost(e) {
@@ -28,7 +28,7 @@ function doPost(e) {
     const now = new Date();
     const row = [now, now, d.invitedAs || "", d.family || "", d.name || "", mobile ? "'" + mobile : "",
                  d.attending || "", d.side || "", (d.events || []).join(", "), d.guests || 0,
-                 d.city || "", d.arrive || "", d.leave || "", d.note || "", 1];
+                 d.city || "", d.arrive || "", d.leave || "", d.note || "", 1, d.local || ""];
 
     let found = 0;
     const last = sh.getLastRow();

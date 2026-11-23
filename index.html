@@ -73,12 +73,12 @@ h1,h2,h3{margin:0;font-weight:500;text-wrap:balance;line-height:1.2}
 .intro .for{margin:0;font-size:15px;letter-spacing:.3em;text-transform:uppercase;font-family:var(--f-head)}
 .intro .who{font-family:var(--f-script);font-size:clamp(46px,11vw,72px);line-height:1;color:#fff;margin:-8px 0 0}
 .env{position:relative;width:min(340px,86vw);aspect-ratio:3/2;max-width:100%;perspective:900px;cursor:pointer;border:0;padding:0;background:none}
-.env-back{position:absolute;inset:0;border-radius:6px;background:#e9cf9f}
-.env-card{position:absolute;left:7%;right:7%;top:8%;bottom:6%;border-radius:4px;background:var(--card);display:grid;place-items:center;align-content:center;gap:2px;color:var(--plum);
+.env-back{position:absolute;inset:0;z-index:0;border-radius:6px;background:#e9cf9f}
+.env-card{position:absolute;z-index:1;left:7%;right:7%;top:8%;bottom:6%;border-radius:4px;background:var(--card);display:grid;place-items:center;align-content:start;padding-top:11%;gap:4px;color:var(--plum);
   box-shadow:inset 0 0 0 6px var(--card),inset 0 0 0 7.5px var(--gold);transition:transform 1s cubic-bezier(.5,0,.2,1) .35s}
-.env-card b{font-family:var(--f-script);font-weight:400;font-size:34px;line-height:1}
+.env-card b{font-family:var(--f-script);font-weight:400;font-size:clamp(24px,7.4vw,34px);line-height:1.1;white-space:nowrap}
 .env-card span{font-family:var(--f-head);font-size:11px;letter-spacing:.2em}
-.env-front{position:absolute;inset:0;border-radius:6px;background:
+.env-front{position:absolute;inset:0;z-index:2;border-radius:6px;background:
   linear-gradient(to top right,#e3c48e 50%,transparent 50.5%) left/50% 100% no-repeat,
   linear-gradient(to top left,#dcbb82 50%,transparent 50.5%) right/50% 100% no-repeat;filter:drop-shadow(0 -1px 0 rgba(0,0,0,.08))}
 .env-flap{position:absolute;left:0;right:0;top:0;height:62%;transform-origin:top;transition:transform .7s ease;z-index:3;
@@ -356,6 +356,13 @@ footer a{color:var(--gold-2)}
         Need to change something later? Fill it again with the <b>same mobile number</b> and we'll update your family's earlier reply instead of adding a new one.</p>
       </div>
       <form id="rsvpForm" novalidate>
+        <div id="localWrap">
+          <span class="lbl" id="localLbl">Are you from Jodhpur?</span>
+          <div class="chips" role="radiogroup" aria-labelledby="localLbl">
+            <label class="chip"><input type="radio" name="local" id="local-yes" value="yes"><span>Yes, we live in Jodhpur</span></label>
+            <label class="chip"><input type="radio" name="local" id="local-no" value="no"><span>No, we're coming from outside</span></label>
+          </div>
+        </div>
         <div class="row2">
           <div><label for="r-family">Family name</label><input class="field" id="r-family" placeholder="e.g. Maheshwari family, Jaipur"></div>
           <div><label for="r-name">Your full name</label><input class="field" id="r-name" name="name" autocomplete="name" placeholder="Full name"></div>
@@ -374,9 +381,9 @@ footer a{color:var(--gold-2)}
         </div>
         <div class="row2">
           <div><label for="r-guests">Number of people in your family coming</label><input class="field" id="r-guests" type="number" min="1" max="10" value="1"></div>
-          <div><label for="r-city">Travelling from</label><input class="field" id="r-city" placeholder="City"></div>
+          <div id="cityWrap"><label for="r-city">Travelling from</label><input class="field" id="r-city" placeholder="City"></div>
         </div>
-        <div class="row2">
+        <div class="row2" id="travelWrap">
           <div><label for="r-arrive" id="arriveLabel">Arriving in Pushkar</label><input class="field" id="r-arrive" type="date"></div>
           <div><label for="r-leave">Leaving on</label><input class="field" id="r-leave" type="date"></div>
         </div>
@@ -663,6 +670,18 @@ $("#sideChips").innerHTML = CONFIG.sides.map((s, i) => `<label class="chip"><inp
 $("#evChips").innerHTML = CONFIG.events.map((e, i) => `<label class="chip"><input type="checkbox" name="ev" id="ev-${i}" value="${esc(e.name)}" checked><span>${esc(e.name)}</span></label>`).join("");
 $("#arriveLabel").textContent = INVITE ? `Arriving in ${CONFIG.city}` : "Arriving on";
 $("#r-arrive").value = CONFIG.arriveBy; $("#r-leave").value = CONFIG.leaveOn;
+// "Are you from Jodhpur?": Jodhpur families skip the travel questions. Not asked on the Pushkar invitation (everyone travels there).
+const ASK_LOCAL = INVITE !== "pushkar";
+$("#localWrap").hidden = !ASK_LOCAL;
+const isLocal = () => ASK_LOCAL && ($("#local-yes").checked);
+function syncLocal(){
+  const local = isLocal();
+  $("#cityWrap").hidden = local;
+  $("#travelWrap").hidden = local && INVITE === "jodhpur";   // on the all-events link they still travel to Pushkar
+  if (!INVITE) $("#arriveLabel").textContent = local ? "Arriving in Pushkar" : "Arriving on";
+}
+document.querySelectorAll('input[name="local"]').forEach(i => i.addEventListener("change", syncLocal));
+syncLocal();
 function send(p){
   store.set("rsvp" + KEY, JSON.stringify(p));
   if (!CONFIG.sheetUrl || PREVIEW) return Promise.resolve(false);
@@ -675,10 +694,14 @@ function collect(attending){
     side: (document.querySelector('input[name="side"]:checked') || {}).value || "",
     events: attending === "yes" ? [...document.querySelectorAll('input[name="ev"]:checked')].map(i => i.value) : [],
     guests: attending === "yes" ? Math.max(1, parseInt($("#r-guests").value, 10) || 1) : 0,
-    city: $("#r-city").value.trim(), arrive: $("#r-arrive").value, leave: $("#r-leave").value, note: $("#r-note").value.trim() };
+    local: ASK_LOCAL ? ((document.querySelector('input[name="local"]:checked') || {}).value || "") : "",
+    city: isLocal() ? "Jodhpur" : $("#r-city").value.trim(),
+    arrive: $("#travelWrap").hidden ? "" : $("#r-arrive").value, leave: $("#travelWrap").hidden ? "" : $("#r-leave").value,
+    note: $("#r-note").value.trim() };
 }
 function check(p){
   const err = (msg, id) => { $("#r-err").textContent = msg; $(id).focus(); return false; };
+  if (ASK_LOCAL && !p.local) return err("Please tell us if you're from Jodhpur.", "#local-yes");
   if (!p.family) return err("Please write your family name.", "#r-family");
   if (!p.name) return err("Please write your name so we know who filled this in.", "#r-name");
   if (p.phone.length !== 10) return err("Please enter a 10-digit mobile number. We use it to keep one reply per family.", "#r-phone");
@@ -688,7 +711,7 @@ function showThanks(p, sent){
   $("#rsvpForm").hidden = true; $("#thanks").hidden = false;
   const yes = p.attending === "yes";
   $("#thanksTitle").textContent = yes ? `See you in ${CONFIG.city}, ${p.name.split(" ")[0]}!` : "We'll miss you";
-  $("#thanksText").textContent = (yes ? `${p.family}: ${p.guests} ${p.guests > 1 ? "people" : "person"} for ${p.events.join(", ")}. We'll message you on ${p.phone} about rooms and pickup.`
+  $("#thanksText").textContent = (yes ? `${p.family}: ${p.guests} ${p.guests > 1 ? "people" : "person"} for ${p.events.join(", ")}. We'll message you on ${p.phone} ${p.local === "yes" && INVITE === "jodhpur" ? "with the details" : "about rooms and pickup"}.`
       : "Thank you for telling us. We'll send you lots of photos.")
     + (sent ? "" : CONFIG.sheetUrl && !PREVIEW ? " We couldn't reach the guest list just now and will try again next time you open this page." : " (Preview: your answer was saved only on this device.)");
 }
@@ -714,6 +737,7 @@ try {
     $("#r-guests").value = prev.guests || 1; $("#r-city").value = prev.city || ""; $("#r-note").value = prev.note || "";
     if (prev.arrive) $("#r-arrive").value = prev.arrive; if (prev.leave) $("#r-leave").value = prev.leave;
     document.querySelectorAll('input[name="side"]').forEach(i => i.checked = i.value === prev.side);
+    document.querySelectorAll('input[name="local"]').forEach(i => i.checked = i.value === prev.local); syncLocal();
     if (prev.attending === "yes") document.querySelectorAll('input[name="ev"]').forEach(i => i.checked = (prev.events || []).includes(i.value));
     showThanks(prev, true);
     $("#thanksText").textContent = "Your family's RSVP is already in. Tap below if you need to change it. It will update the same reply.";
